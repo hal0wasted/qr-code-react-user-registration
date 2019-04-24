@@ -4,6 +4,7 @@ import {
   mapState,
   mapDispatch
 } from '../Actions/ActionCreators'
+import BasicUserData from './Views/BasicUserData'
 
 class App extends React.Component {
   componentDidMount(){
@@ -12,14 +13,12 @@ class App extends React.Component {
   }
   render(){
     return(
-      <React.Fragment>
-        <div></div>
-      </React.Fragment>
+      <div>
+        <BasicUserData/>
+
+      </div>
     )
   }
 }
 
-// connect our React component and export the connected component for use
-const connectedComponent = connect(mapState, mapDispatch)(App)
-
-export default connectedComponent
+export default connect(mapState, mapDispatch)(App)
