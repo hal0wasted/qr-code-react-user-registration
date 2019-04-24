@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UserDataForm from '../Forms/UserDataForm'
-import '../../scss/user-data-view.scss'
+import Title from '../Subcomponents/Title'
+import { withRouter } from 'react-router'
 
 class BasicUserData extends Component {
   constructor(){
@@ -8,17 +9,19 @@ class BasicUserData extends Component {
     this.submit = this.submit.bind(this)
   }
   submit(values){
+    const { history } = this.props
     console.log(values)
+    history.push('/QrReader')
   }
   render(){
     const title = 'User Data'
     return (
       <div>
-        <div className='user-data-view-title'>{title}</div>
+        <Title title={title}/>
         <UserDataForm onSubmit={this.submit}/>
       </div>
     )
   }
 }
 
-export default BasicUserData
+export default withRouter(BasicUserData)

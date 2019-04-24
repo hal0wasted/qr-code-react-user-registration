@@ -1,16 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import RootReducer from './Reducers/RootReducer'
 import App from './Components/App'
 import WebFont from 'webfontloader'
+import {
+  Route,
+  Link,
+  HashRouter as Router
+} from 'react-router-dom'
 import './index.scss'
 
 init()
 
 function init(){
   // inject some initial DOM into our HTML before letting React takeover
+  let title = `BELL Pilot Info`
+  document.querySelector('title').innerHTML = title
   let root = document.createElement('div')
   document.body.appendChild(root)
   root.id = 'root'
@@ -25,7 +32,9 @@ function init(){
   // Render
   ReactDOM.render(
     <Provider store={store}>
-      <App/>
+      <Router>
+        <App/>
+      </Router>
     </Provider>,
     root
   )
