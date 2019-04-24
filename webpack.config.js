@@ -8,7 +8,9 @@ module.exports = {
     filename: './index.js'
   },
   devServer: {
-    publicPath: '/'
+    publicPath: '/',
+    host: '0.0.0.0',
+    port: 80
   },
   mode: 'development',
   watchOptions: {

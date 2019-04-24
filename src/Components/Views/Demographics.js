@@ -5,7 +5,9 @@ class Demographics extends Component {
   render(){
     const title = 'Demographic Survey'
     return (
-      <Title title={title}/>
+      <div>
+        <Title title={title}/>
+      </div>
     )
   }
 }

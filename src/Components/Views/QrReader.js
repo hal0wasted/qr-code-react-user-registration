@@ -1,13 +1,43 @@
 import React, { Component } from 'react'
 import Title from '../Subcomponents/Title'
+import { connect } from 'react-redux'
+import { mapState, mapDispatch } from '../../Actions/ActionCreators'
+import QR from 'react-qr-reader'
 
 class QrReader extends Component {
+  constructor(){
+    super()
+    this.handleScan = this.handleScan.bind(this)
+    this.handleError = this.handleError.bind(this)
+  }
+  handleScan(data){
+    const { scan } = this.props
+    if(data){
+      scan(data)
+    }
+  }
+  handleError(err){
+    console.log(err)
+  }
   render(){
     const title = 'QR Reader'
+    const { scanData } = this.props
     return (
-      <Title title={title}/>
+      <div>
+        <Title title={title}/>
+        <QR
+          delay={500}
+          onError={this.handleError}
+          onScan={this.handleScan}
+          style={{
+            width: '50%',
+            margin: 'auto',
+            display: 'block',
+            left: 0, right: 0
+          }} />
+      </div>
     )
   }
 }
 
-export default QrReader
+export default connect(mapState, mapDispatch)(QrReader)

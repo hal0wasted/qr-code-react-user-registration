@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+// import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import RootReducer from './Reducers/RootReducer'
+import rootReducer from './Reducers/rootReducer'
 import App from './Components/App'
 import WebFont from 'webfontloader'
 import {
@@ -23,7 +24,7 @@ function init(){
   root.id = 'root'
 
   // Redux Store
-  const store = createStore(RootReducer)
+  const store = createStore(rootReducer)  //, applyMiddleware(thunk))
   console.log(store.getState())
   store.subscribe(() => {
     console.log(store.getState())
