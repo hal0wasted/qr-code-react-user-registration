@@ -5,6 +5,7 @@ import { mapState, mapDispatch } from '../Actions/ActionCreators'
 import { withRouter } from 'react-router'
 import { Route } from 'react-router-dom'
 import BasicUserData from './Views/BasicUserData'
+import Demographics from './Views/Demographics'
 import QrReader from './Views/QrReader'
 
 class App extends React.Component {
@@ -19,8 +20,8 @@ class App extends React.Component {
     return(
       <React.Fragment>
         <Route path={'/UserData'} component={BasicUserData} />
+        <Route path={'/Demographics'} component={Demographics} />
         <Route path={'/QrReader'} component={QrReader} />
-
       </React.Fragment>
     )
   }
