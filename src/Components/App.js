@@ -21,7 +21,9 @@ class App extends React.Component {
       <React.Fragment>
         <Route path={'/UserData'} component={BasicUserData} />
         <Route path={'/Demographics'} component={Demographics} />
+        { /*<Route path={'/Video'} component={Video} />*/ }
         <Route path={'/QrReader'} component={QrReader} />
+        { /*<Route path={'/Done'} component={Done} />*/ }
       </React.Fragment>
     )
   }
