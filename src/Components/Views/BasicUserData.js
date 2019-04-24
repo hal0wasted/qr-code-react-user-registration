@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import UserDataForm from '../Forms/UserDataForm'
+import '../../scss/user-data-view.scss'
 
 class BasicUserData extends Component {
   constructor(){
@@ -13,7 +14,7 @@ class BasicUserData extends Component {
     const title = 'User Data'
     return (
       <div>
-        <div>{title}</div>
+        <div className='user-data-view-title'>{title}</div>
         <UserDataForm onSubmit={this.submit}/>
       </div>
     )

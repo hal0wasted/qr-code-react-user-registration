@@ -8,5 +8,4 @@ export const mapState = state => ({
 // mapDispatchToProps
 export const mapDispatch = dispatch => ({
   test: ()=>{ dispatch(test) }
-
 })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import '../../scss/user-data-form.scss'
 
 class UserDataForm extends Component {
   render(){
@@ -7,11 +8,11 @@ class UserDataForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="firstName">First&nbsp;&nbsp;</label>
           <Field name="firstName" component="input" type="text"/>
         </div>
         <div>
-          <label htmlFor="lastName">First Name</label>
+          <label htmlFor="lastName">Last&nbsp;&nbsp;</label>
           <Field name="lastName" component="input" type="text"/>
         </div>
         <div>
