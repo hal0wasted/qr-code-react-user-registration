@@ -32,7 +32,8 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "babel-plugin-transform-class-properties": "^6.24.1"
   },
   "scripts": {
     "compile": "webpack --mode production",
@@ -43,6 +44,9 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      "transform-class-properties"
     ]
   },
   "author": "",

@@ -5,18 +5,13 @@ import { mapState, mapDispatch } from '../../Actions/ActionCreators'
 import QR from 'react-qr-reader'
 
 class QrReader extends Component {
-  constructor(){
-    super()
-    this.handleScan = this.handleScan.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
-  handleScan(data){
+  handleScan = (data) => {
     const { scan } = this.props
     if(data){
       scan(data)
     }
   }
-  handleError(err){
+  handleError = (err) => {
     console.log(err)
   }
   render(){
