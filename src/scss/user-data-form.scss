@@ -16,7 +16,8 @@ input {
 }
 
 input:focus {
-  border: 2px solid red;
+  border: 1px solid red;
+  box-shadow: 0 0 10px red;
 }
 
 label {
