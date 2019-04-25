@@ -17,12 +17,9 @@ init()
 
 function init(){
   // inject some initial DOM into our HTML before letting React takeover
-  let title = `BELL Pilot Info`
-  document.querySelector('title').innerHTML = title
-  document.head.innerHTML += `<meta name="viewport" content="width=device-width, initial-scale=1">`
-  let root = document.createElement('div')
-  document.body.appendChild(root)
-  root.id = 'root'
+  document.querySelector('title').innerHTML = `BELL Pilot Info`
+  document.head.innerHTML += `<meta name='viewport' content='width=device-width, initial-scale=1'>`
+  document.body.innerHTML += `<div id='root'></div>`
 
   // Redux Store
   const store = createStore(rootReducer)  //, applyMiddleware(thunk))
@@ -38,6 +35,6 @@ function init(){
         <App/>
       </Router>
     </Provider>,
-    root
+    document.querySelector('#root')
   )
 }
