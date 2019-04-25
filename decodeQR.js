@@ -24,7 +24,8 @@ function decodeQR(filename){
       if (err) throw err;
       const pixelArray = convertPNGtoByteArray(pngData)
       const qrData = jsQR(pixelArray, pngData.width, pngData.height)
-      console.log( qrData.data )
+      if (qrData && qrData.data !== null) console.log( qrData.data )
+      else console.log('not a valid QR code')
     })
   })
 }
