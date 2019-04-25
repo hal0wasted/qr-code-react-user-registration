@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Camera, { IMAGE_TYPES } from 'react-html5-camera-photo'
+import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo'
 import 'react-html5-camera-photo/build/css/index.css'
 import axios from 'axios'
 
@@ -37,9 +37,10 @@ class CameraCapture extends Component {
       <Camera
         onTakePhoto = { dataUri => { this.onTakePhoto(dataUri) } }
         onCameraError = { err => { this.onCameraError(err) } }
+        idealFacingMode = {FACING_MODES.ENVIRONMENT}
         idealResolution = {{width: 640, height: 480}}
         imageCompression = {0.8}
-        imageType = { IMAGE_TYPES.JPG }
+        imageType = { IMAGE_TYPES.PNG }
       />
     )
   }

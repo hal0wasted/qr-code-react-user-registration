@@ -1,7 +1,8 @@
-const express = require('express'),
-    chalk = require('chalk'),
-    bodyParser = require('body-parser')
-    fs = require( 'fs' );
+const fs = require( 'fs' )
+const express = require('express')
+const chalk = require('chalk')
+const bodyParser = require('body-parser')
+const decodeQR = require('./decodeQR.js')
 
 const pkg = require( './package.json' );
 
@@ -36,10 +37,11 @@ app.use(express.json({ limit: '50mb' }))
 app.post(`/imageOutput`, (req, res) => {
   console.log( req.body.data )
   const imageBuffer = new Buffer(req.body.data, 'base64'); //console = <Buffer 75 ab 5a 8a ...
-  const fileName = `test.jpg`
+  const fileName = `output.png`
   fs.writeFile(fileName, imageBuffer, (err) => {
     if (!err) {
       console.log(`successfully wrote ${fileName}`)
+      decodeQR(fileName)
     }
   })
 })
