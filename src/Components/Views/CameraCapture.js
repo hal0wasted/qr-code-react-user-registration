@@ -8,21 +8,33 @@ import _, { flow } from 'lodash'
 import axios from 'axios'
 
 class CameraCapture extends Component {
-  outputToImage = data => {
+  /* constructor(){
+    super()
+    this.stream = this.stream.bind(this)
+  } */
+  onComponentWillUnmount(){
+    console.log(`The component is unmounting as we speak!`)
+  }
+  outputToImage = async (data) => {
     const { history, scan } = this.props
     const protocol = `https`
     const host = `192.168.1.10`
     const port = 3000
-    axios.post(`${protocol}://${host}:${port}/imageOutput/`, {
-            data: data.data
-          })
-         .then(code => {
-           // now, we will change the View to <Done/>
-           console.log(code)
-           scan(code.data)
-           history.push(`/UserData`)
-         })
-         .catch(err => console.log(err))
+    // const delay = 2000
+    try {
+      const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
+      console.log(code)
+      scan(code.data)
+      // axios call to send data to DB
+      //await axios.post(post/user/data/to/mysql/instance)
+      history.push(`/UserData`)
+      // showSuccessRegisteredMessage()
+      // send `you are now registered!` message once we're back in /UserData
+      // have to reload the page until I find a solution for turning off the camera
+      window.location.reload()
+    }catch(err){
+      console.log(err)
+    }
   }
   processPhoto = dataString => {
     const matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
@@ -43,6 +55,12 @@ class CameraCapture extends Component {
   onCameraError = err => {
     console.log(err)
   }
+  onCameraStart = stream => {
+    this.stream = stream
+  }
+  onCameraStop = () => {
+    console.log('web cam stopped.')
+  }
   render(){
     const { qr } = this.props
     console.log( qr )
@@ -55,6 +73,8 @@ class CameraCapture extends Component {
         imageCompression = {0.8}
         isImageMirror = {false}
         imageType = { IMAGE_TYPES.PNG }
+        onCameraStart = { (stream) => { this.onCameraStart(stream); } }
+        onCameraStop = { () => { this.onCameraStop(); } }
       />
     )
   }
