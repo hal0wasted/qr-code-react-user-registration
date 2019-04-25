@@ -44,6 +44,8 @@ class CameraCapture extends Component {
     console.log(err)
   }
   render(){
+    const { qr } = this.props
+    console.log( qr )
     return (
       <Camera
         onTakePhoto = { dataUri => { this.onTakePhoto(dataUri) } }

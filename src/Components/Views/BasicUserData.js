@@ -15,12 +15,13 @@ class BasicUserData extends Component {
   }
   render(){
     const title = 'User Data'
-    const { scan } = this.props
-    console.log(scan)
+    const { qr } = this.props
+    console.log(qr)
     return (
       <div>
         <Title title={title}/>
         <UserDataForm onSubmit={this.submit}/>
+        { qr !== null ? <div>{qr}</div> : <div>no qr data.</div> }
       </div>
     )
   }
