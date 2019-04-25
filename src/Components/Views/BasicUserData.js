@@ -4,7 +4,7 @@ import Title from '../Subcomponents/Title'
 import { withRouter } from 'react-router'
 
 class BasicUserData extends Component {
-  submit = values => {
+  submit = (values) => {
     const { history } = this.props
     console.log(values)
     history.push('/QrReader')

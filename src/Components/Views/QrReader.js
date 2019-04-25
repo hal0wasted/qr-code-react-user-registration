@@ -3,6 +3,7 @@ import Title from '../Subcomponents/Title'
 import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../../Actions/ActionCreators'
 import QR from 'react-qr-reader'
+import '../../scss/show-input.scss'
 
 class QrReader extends Component {
   handleScan = (data) => {
@@ -18,7 +19,7 @@ class QrReader extends Component {
     const title = 'QR Reader'
     const { scanData } = this.props
     return (
-      <div>
+      <div className='show-input'>
         <Title title={title}/>
         <QR
           delay={500}

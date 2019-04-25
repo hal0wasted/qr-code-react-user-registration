@@ -23,6 +23,7 @@ class App extends React.Component {
         <Route path={'/Demographics'} component={Demographics} />
         { /*<Route path={'/Video'} component={Video} />*/ }
         <Route path={'/QrReader'} component={QrReader} />
+        { location.history === '/QrReader' ? QrReader.openImageDialog() : null }
         { /*<Route path={'/Done'} component={Done} />*/ }
       </React.Fragment>
     )
