@@ -23,6 +23,7 @@ class QrReader extends Component {
         <Title title={title}/>
         <QR
           delay={500}
+          legacyMode={true}
           onError={this.handleError}
           onScan={this.handleScan}
           style={{

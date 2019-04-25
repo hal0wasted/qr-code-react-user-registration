@@ -7,8 +7,8 @@ class BasicUserData extends Component {
   submit = (values) => {
     const { history } = this.props
     console.log(values)
-    history.push('/QrReader')
-    // history.push('/CameraCapture')
+    // history.push('/QrReader')
+    history.push('/CameraCapture')
   }
   render(){
     const title = 'User Data'
