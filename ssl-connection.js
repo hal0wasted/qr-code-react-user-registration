@@ -41,7 +41,7 @@ app.post(`/imageOutput`, (req, res) => {
   fs.writeFile(fileName, imageBuffer, (err) => {
     if (!err) {
       console.log(`successfully wrote ${fileName}`)
-      decodeQR(fileName)
+      decodeQR(fileName, res)
     }
   })
 })

@@ -5,7 +5,7 @@ import scan from './scanner'
 import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
-  scan,
-  test,
+  scan: scan,
+  test: test,
   form: formReducer
 })

@@ -17,14 +17,17 @@ function convertPNGtoByteArray(pngData) {
   return data
 }
 
-function decodeQR(filename){
+function decodeQR(filename, res){
   fs.readFile(filename, (err, buffer) => {
     const pngReader = new PNGReader(buffer)
     pngReader.parse(function(err, pngData) {
       if (err) throw err;
       const pixelArray = convertPNGtoByteArray(pngData)
       const qrData = jsQR(pixelArray, pngData.width, pngData.height)
-      if (qrData && qrData.data !== null) console.log( qrData.data )
+      if (qrData && qrData.data !== null){
+        console.log( qrData.data )
+        res.send( qrData.data )
+      }
       else console.log('not a valid QR code')
     })
   })
