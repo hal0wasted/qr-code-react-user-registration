@@ -8,6 +8,7 @@ class BasicUserData extends Component {
     const { history } = this.props
     console.log(values)
     history.push('/QrReader')
+    // history.push('/CameraCapture')
   }
   render(){
     const title = 'User Data'

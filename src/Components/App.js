@@ -6,6 +6,7 @@ import { withRouter } from 'react-router'
 import { Route } from 'react-router-dom'
 import BasicUserData from './Views/BasicUserData'
 import Demographics from './Views/Demographics'
+// import CameraCapture from './Views/CameraCapture'
 import QrReader from './Views/QrReader'
 
 class App extends React.Component {
@@ -21,9 +22,9 @@ class App extends React.Component {
       <React.Fragment>
         <Route path={'/UserData'} component={BasicUserData} />
         <Route path={'/Demographics'} component={Demographics} />
+        { /*<Route path={'/CameraCapture'} component={CameraCapture} />*/ }
         { /*<Route path={'/Video'} component={Video} />*/ }
         <Route path={'/QrReader'} component={QrReader} />
-        { location.history === '/QrReader' ? QrReader.openImageDialog() : null }
         { /*<Route path={'/Done'} component={Done} />*/ }
       </React.Fragment>
     )
