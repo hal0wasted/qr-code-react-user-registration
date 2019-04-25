@@ -8,13 +8,6 @@ import _, { flow } from 'lodash'
 import axios from 'axios'
 
 class CameraCapture extends Component {
-  /* constructor(){
-    super()
-    this.stream = this.stream.bind(this)
-  } */
-  onComponentWillUnmount(){
-    console.log(`The component is unmounting as we speak!`)
-  }
   outputToImage = async (data) => {
     const { history, scan } = this.props
     const protocol = `https`
