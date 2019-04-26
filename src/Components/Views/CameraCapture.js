@@ -5,26 +5,40 @@ import { mapState, mapDispatch } from '../../Actions/ActionCreators'
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo'
 import 'react-html5-camera-photo/build/css/index.css'
 import _, { flow } from 'lodash'
+// import axiosConfig from './axios.config'
 import axios from 'axios'
 
 class CameraCapture extends Component {
   outputToImage = async (data) => {
-    const { history, scan } = this.props
+    const { history, scan, userValues } = this.props
     const protocol = `https`
-    const host = `192.168.1.10`
+    const host = {
+      work: `192.168.2.70`,
+      home: `192.168.1.10`
+    }
     const port = 3000
-    // const delay = 2000
     try {
-      const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
+      const code = await axios.post(`${protocol}://${host.work}:${port}/imageOutput/`, { data: data.data })
       console.log(code)
       scan(code.data)
       // axios call to send data to DB
-      //await axios.post(post/user/data/to/mysql/instance)
-      history.push(`/UserData`)
-      // showSuccessRegisteredMessage()
-      // send `you are now registered!` message once we're back in /UserData
-      // have to reload the page until I find a solution for turning off the camera
-      window.location.reload()
+      const response = await axios.post(`${protocol}://${host.work}:${port}/userDataSubmit/`, {
+        data: {
+          firstName: userValues.firstName,
+          lastName: userValues.lastName,
+          email: userValues.email,
+          qr: code.data
+        }
+      })
+      if (response.data.message === 'ok'){
+        history.push(`/UserData`)
+        // showSuccessRegisteredMessage()
+        // send `you are now registered!` message once we're back in /UserData
+        // have to reload the page until I find a solution for turning off the camera
+        window.location.reload()
+      }else{
+        console.log(`looks like mysql QR insert failed`)
+      }
     }catch(err){
       console.log(err)
     }

@@ -3,15 +3,19 @@ const express = require('express')
 const chalk = require('chalk')
 const bodyParser = require('body-parser')
 const decodeQR = require('./decodeQR.js')
-
+const mysql = require('mysql')
 const pkg = require( './package.json' );
+const hostIP = {
+  work: `192.168.2.70`,
+  home: `192.168.1.10`
+}
+const start = Date.now()
+const protocol = process.env.PROTOCOL || 'https'
+const port = process.env.PORT || '3000'
+const host = process.env.HOST || hostIP.work
+const { mysqlConfig } = require('./mysql.config')
 
-const start = Date.now(),
-    protocol = process.env.PROTOCOL || 'https',
-    port = process.env.PORT || '3000',
-    host = process.env.HOST || '192.168.1.10';
-
-let server;
+let server, dbConnection
 
 function sendBootStatus( status ) {
      // don't send anything if we're not running in a fork
@@ -36,13 +40,33 @@ app.use(express.json({ limit: '50mb' }))
 
 app.post(`/imageOutput`, (req, res) => {
   console.log( req.body.data )
-  const imageBuffer = new Buffer(req.body.data, 'base64'); //console = <Buffer 75 ab 5a 8a ...
+  const imageData = req.body.data
+  const imageBuffer = new Buffer(imageData, 'base64'); //console = <Buffer 75 ab 5a 8a ...
   const fileName = `output.png`
   fs.writeFile(fileName, imageBuffer, (err) => {
     if (!err) {
       console.log(`successfully wrote ${fileName}`)
       decodeQR(fileName, res)
     }
+  })
+})
+
+/*app.post(`/qrSubmit`, (req, res) => {
+  console.log(req.body.data)
+  const qrString = req.body.data
+  dbConnection.query(`INSERT INTO Pilots (QR) VALUES ('${qrString}')`, (err, result) => {
+    if (!err) res.send({ message: 'ok' })
+    else console.log(err)
+  })
+})*/
+
+app.post(`/userDataSubmit`, (req, res) => {
+  console.log(req.body.data)
+  const userData = req.body.data
+  console.log(typeof userData.firstName)
+  dbConnection.query(`INSERT INTO Pilots (FirstName, LastName, Email, QR) VALUES ('${userData.firstName}', '${userData.lastName}', '${userData.email}', '${userData.qr}')`, (err, result) => {
+    if (!err) res.send({ message: 'ok' })
+    else console.log(err)
   })
 })
 
@@ -72,7 +96,7 @@ if ( protocol === 'https' ) {
 		try {
 			execSync( 'openssl version', execOptions );
 			execSync(
-				`openssl req -x509 -newkey rsa:2048 -keyout ./certs/key.tmp.pem -out ${ certificate } -days 365 -nodes -subj "/C=US/ST=Foo/L=Bar/O=Baz/CN=192.168.1.10"`,
+				`openssl req -x509 -newkey rsa:2048 -keyout ./certs/key.tmp.pem -out ${ certificate } -days 365 -nodes -subj "/C=US/ST=Foo/L=Bar/O=Baz/CN=${host}"`,
 				execOptions
 			);
 			execSync( `openssl rsa -in ./certs/key.tmp.pem -out ${ key }`, execOptions );
@@ -83,12 +107,27 @@ if ( protocol === 'https' ) {
 	}
 
 	const options = {
-	     key: fs.readFileSync( key ),
-	     cert: fs.readFileSync( certificate ),
-	     passphrase : 'password'
-        };
+	   key: fs.readFileSync( key ),
+     cert: fs.readFileSync( certificate ),
+     passphrase : 'password'
+  };
 
 	server = require( 'https' ).createServer( options, app );
+
+  // start MySQL connection
+  // necessary SQL statement to execute for node connection in MySQL 8:
+  // ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
+  dbConnection = mysql.createConnection({
+    host: hostIP.work,
+    user: mysqlConfig.user,
+    socketPath: `/tmp/mysql.sock`, // <-- necessary for node it seems
+    password: mysqlConfig.pwd,
+    database: `FFC2`
+  })
+  dbConnection.connect((err)=>{
+    if(!err) console.log(`mysql: connected as id ${dbConnection.threadId}`)
+    else console.log(`error: ${err.stack}`)
+  })
 
 } else {
     server = require( 'http' ).createServer( app );

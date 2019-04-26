@@ -1,6 +1,7 @@
 const Types = Object.freeze({
   TEST: 'TEST',
-  SCAN: 'SCAN'
+  SCAN: 'SCAN',
+  USER_VALUES: 'USER_VALUES'
 })
 
 export default Types

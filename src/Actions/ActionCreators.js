@@ -1,4 +1,4 @@
-import { test, scan } from './Actions'
+import { test, scan, getUserVals } from './Actions'
 
 // mapStateToProps
 export const mapState = state => ({
@@ -9,5 +9,6 @@ export const mapState = state => ({
 // ..or you will get a middleware error
 export const mapDispatch = dispatch => ({
   test: () => { dispatch(test) },
-  scan: (data) => { dispatch(scan(data)) }
+  scan: (data) => { dispatch(scan(data)) },
+  getUserVals: (values) => { dispatch(getUserVals(values)) }
 })
