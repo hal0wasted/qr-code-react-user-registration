@@ -1,22 +1,16 @@
 import _, { flow } from 'lodash'
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import UserDataForm from '../Forms/UserDataForm'
 import Title from '../Subcomponents/Title'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../../Actions/ActionCreators'
-// import axiosConfig from './axios.config'
+import { host, protocol, port } from '../../../config'
 import axios from 'axios'
 
-class BasicUserData extends Component {
+class BasicUserData extends PureComponent {
   submit = async (values) => {
     const { history, getUserVals } = this.props
-    const protocol = `https`
-    const host = {
-      work: `192.168.2.70`,
-      home: `192.168.1.10`
-    }
-    const port = 3000
     console.log(values)
     // history.push('/QrReader')
     getUserVals(values)

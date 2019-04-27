@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import _, { flow } from 'lodash'
 import { mapState, mapDispatch } from '../Actions/ActionCreators'
@@ -9,7 +9,7 @@ import Demographics from './Views/Demographics'
 import CameraCapture from './Views/CameraCapture'
 // import QrReader from './Views/QrReader'
 
-class App extends React.Component {
+class App extends PureComponent {
   componentDidMount(){
     const { test, history } = this.props
     test()
@@ -21,7 +21,7 @@ class App extends React.Component {
     return(
       <React.Fragment>
         <Route path={'/UserData'} component={BasicUserData} />
-        <Route path={'/Demographics'} component={Demographics} />
+        { /*<Route path={'/Demographics'} component={Demographics} />*/ }
         <Route path={'/CameraCapture'} component={CameraCapture} />
         { /*<Route path={'/Video'} component={Video} />*/ }
         { /*<Route path={'/QrReader'} component={QrReader} />*/ }

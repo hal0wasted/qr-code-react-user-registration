@@ -5,15 +5,11 @@ const bodyParser = require('body-parser')
 const decodeQR = require('./decodeQR.js')
 const mysql = require('mysql')
 const pkg = require( './package.json' );
-const hostIP = {
-  work: `192.168.2.70`,
-  home: `192.168.1.10`
-}
+const config = require('./config')
 const start = Date.now()
-const protocol = process.env.PROTOCOL || 'https'
-const port = process.env.PORT || '3000'
-const host = process.env.HOST || hostIP.work
-const { mysqlConfig } = require('./mysql.config')
+const protocol = process.env.PROTOCOL || config.protocol
+const port = process.env.PORT || config.port
+const host = process.env.HOST || config.home
 
 let server, dbConnection
 
@@ -118,10 +114,10 @@ if ( protocol === 'https' ) {
   // necessary SQL statement to execute for node connection in MySQL 8:
   // ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
   dbConnection = mysql.createConnection({
-    host: hostIP.work,
-    user: mysqlConfig.user,
+    host: host,
+    user: config.mysql.user,
     socketPath: `/tmp/mysql.sock`, // <-- necessary for node it seems
-    password: mysqlConfig.pwd,
+    password: config.mysql.pwd,
     database: `FFC2`
   })
   dbConnection.connect((err)=>{

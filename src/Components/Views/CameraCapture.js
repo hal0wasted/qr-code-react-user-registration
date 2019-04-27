@@ -1,28 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../../Actions/ActionCreators'
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo'
 import 'react-html5-camera-photo/build/css/index.css'
 import _, { flow } from 'lodash'
-// import axiosConfig from './axios.config'
+import config, { protocol, port } from '../../../config'
 import axios from 'axios'
 
-class CameraCapture extends Component {
+class CameraCapture extends PureComponent {
+  shouldComponentUpdate(){
+    return false
+  }
   outputToImage = async (data) => {
     const { history, scan, userValues } = this.props
-    const protocol = `https`
-    const host = {
-      work: `192.168.2.70`,
-      home: `192.168.1.10`
-    }
-    const port = 3000
+    const host = config.host.home
     try {
-      const code = await axios.post(`${protocol}://${host.work}:${port}/imageOutput/`, { data: data.data })
+      const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
       console.log(code)
       scan(code.data)
       // axios call to send data to DB
-      const response = await axios.post(`${protocol}://${host.work}:${port}/userDataSubmit/`, {
+      const response = await axios.post(`${protocol}://${host}:${port}/userDataSubmit/`, {
         data: {
           firstName: userValues.firstName,
           lastName: userValues.lastName,
@@ -35,7 +33,7 @@ class CameraCapture extends Component {
         // showSuccessRegisteredMessage()
         // send `you are now registered!` message once we're back in /UserData
         // have to reload the page until I find a solution for turning off the camera
-        window.location.reload()
+        // window.location.reload()
       }else{
         console.log(`looks like mysql QR insert failed`)
       }
@@ -62,12 +60,6 @@ class CameraCapture extends Component {
   onCameraError = err => {
     console.log(err)
   }
-  onCameraStart = stream => {
-    this.stream = stream
-  }
-  onCameraStop = () => {
-    console.log('web cam stopped.')
-  }
   render(){
     const { qr } = this.props
     console.log( qr )
@@ -80,8 +72,6 @@ class CameraCapture extends Component {
         imageCompression = {0.8}
         isImageMirror = {false}
         imageType = { IMAGE_TYPES.PNG }
-        onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-        onCameraStop = { () => { this.onCameraStop(); } }
       />
     )
   }
