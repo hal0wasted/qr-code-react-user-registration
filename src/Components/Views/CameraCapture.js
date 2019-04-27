@@ -6,9 +6,9 @@ import 'react-html5-camera-photo/build/css/index.css'
 import config, { protocol, port } from '../../../config'
 import axios from 'axios'
 
-class CameraCapture extends PureComponent {
-  shouldComponentUpdate(){
-    return false
+class CameraCapture extends Component {
+  shouldComponentUpdate(nextProps){
+    return nextProps.cameraVisibility !== this.props.cameraVisibility
   }
   outputToImage = async (data) => {
     const { scan, userValues, hideCamera } = this.props
@@ -51,18 +51,26 @@ class CameraCapture extends PureComponent {
     console.log(err)
   }
   render(){
-    const { qr } = this.props
+    const { qr, cameraVisibility } = this.props
     console.log( qr )
     return (
-      <Camera
-        onTakePhoto = { dataUri => { this.onTakePhoto(dataUri) } }
-        onCameraError = { err => { this.onCameraError(err) } }
-        idealFacingMode = {FACING_MODES.ENVIRONMENT}
-        idealResolution = {{width: 640, height: 480}}
-        imageCompression = {0.8}
-        isImageMirror = {false}
-        imageType = { IMAGE_TYPES.PNG }
-      />
+      <div style={{
+          transform: cameraVisibility === 'hidden' ? `translateX(${innerWidth}px)` : `translateX(0px)`,
+          display: 'block',
+          position: 'absolute',
+          margin: 'auto',
+          top: 0, left: 0, right: 0
+        }}>
+        <Camera
+          onTakePhoto = { dataUri => { this.onTakePhoto(dataUri) } }
+          onCameraError = { err => { this.onCameraError(err) } }
+          idealFacingMode = {FACING_MODES.ENVIRONMENT}
+          idealResolution = {{width: 640, height: 480}}
+          imageCompression = {0.8}
+          isImageMirror = {false}
+          imageType = { IMAGE_TYPES.PNG }
+        />
+      </div>
     )
   }
 }

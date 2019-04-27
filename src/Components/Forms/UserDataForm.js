@@ -8,13 +8,10 @@ const email = value =>
   'Invalid email address' : undefined
 
 class UserDataForm extends Component {
-  componentWillUpdate(){
-    return false
-  }
   render(){
     const { handleSubmit } = this.props
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={ handleSubmit }>
         <div>
           <label htmlFor="firstName">First&nbsp;&nbsp;</label>
           <Field name="firstName" component="input" validate={[required]} type="text"/>
