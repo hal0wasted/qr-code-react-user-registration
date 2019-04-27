@@ -11,6 +11,10 @@ body {
   font-family: 'Aktiv Grotesk', sans-serif;
 }
 
+video {
+  max-width: 600px !important;
+}
+
 .app-body {
   overflow: hidden;
 }

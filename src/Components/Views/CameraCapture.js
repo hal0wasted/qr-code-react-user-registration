@@ -55,7 +55,7 @@ class CameraCapture extends Component {
     console.log( qr )
     return (
       <div style={{
-          transform: cameraVisibility === 'hidden' ? `translateX(${innerWidth}px)` : `translateX(0px)`,
+          transform: cameraVisibility === 'hidden' ? `translateX(${innerWidth*2}px)` : `translateX(0px)`,
           display: 'block',
           position: 'absolute',
           margin: 'auto',
