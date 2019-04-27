@@ -1,10 +1,8 @@
 import React, { Component, PureComponent } from 'react'
-import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../../Actions/ActionCreators'
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo'
 import 'react-html5-camera-photo/build/css/index.css'
-import _, { flow } from 'lodash'
 import config, { protocol, port } from '../../../config'
 import axios from 'axios'
 
@@ -13,13 +11,11 @@ class CameraCapture extends PureComponent {
     return false
   }
   outputToImage = async (data) => {
-    const { history, scan, userValues } = this.props
+    const { scan, userValues, hideCamera } = this.props
     const host = config.host.home
     try {
       const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
-      console.log(code)
       scan(code.data)
-      // axios call to send data to DB
       const response = await axios.post(`${protocol}://${host}:${port}/userDataSubmit/`, {
         data: {
           firstName: userValues.firstName,
@@ -29,11 +25,7 @@ class CameraCapture extends PureComponent {
         }
       })
       if (response.data.message === 'ok'){
-        history.push(`/UserData`)
-        // showSuccessRegisteredMessage()
-        // send `you are now registered!` message once we're back in /UserData
-        // have to reload the page until I find a solution for turning off the camera
-        // window.location.reload()
+        hideCamera()
       }else{
         console.log(`looks like mysql QR insert failed`)
       }
@@ -49,8 +41,6 @@ class CameraCapture extends PureComponent {
     }
     response.type = matches[1]
     response.data = new Buffer(matches[2], 'base64')
-    console.log(response)
-    // return response
     this.outputToImage(response)
   }
   onTakePhoto = dataUri => {
@@ -77,7 +67,4 @@ class CameraCapture extends PureComponent {
   }
 }
 
-export default flow(
-  connect(mapState, mapDispatch),
-  withRouter
-)(CameraCapture)
+export default connect(mapState, mapDispatch)(CameraCapture)

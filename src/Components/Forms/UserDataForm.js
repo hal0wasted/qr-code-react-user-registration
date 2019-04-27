@@ -8,6 +8,9 @@ const email = value =>
   'Invalid email address' : undefined
 
 class UserDataForm extends Component {
+  componentWillUpdate(){
+    return false
+  }
   render(){
     const { handleSubmit } = this.props
     return (

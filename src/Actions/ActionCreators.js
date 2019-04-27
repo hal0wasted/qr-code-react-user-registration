@@ -1,4 +1,4 @@
-import { test, scan, getUserVals } from './Actions'
+import Actions from './Actions'
 
 // mapStateToProps
 export const mapState = state => ({
@@ -8,7 +8,9 @@ export const mapState = state => ({
 // mapDispatchToProps -- be sure to always pass the argument into the inner function call
 // ..or you will get a middleware error
 export const mapDispatch = dispatch => ({
-  test: () => { dispatch(test) },
-  scan: (data) => { dispatch(scan(data)) },
-  getUserVals: (values) => { dispatch(getUserVals(values)) }
+  test: () => { dispatch(Actions.test) },
+  scan: (data) => { dispatch(Actions.scan(data)) },
+  getUserVals: (values) => { dispatch(Actions.getUserVals(values)) },
+  showCamera: () => { dispatch(Actions.showCamera) },
+  hideCamera: () => { dispatch(Actions.hideCamera) }
 })
