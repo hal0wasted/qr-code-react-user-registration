@@ -4,8 +4,8 @@ const chalk = require('chalk')
 const bodyParser = require('body-parser')
 const decodeQR = require('./decodeQR.js')
 const mysql = require('mysql')
-const pkg = require( './package.json' );
-const config = require('./config')
+const pkg = require( '../package.json' );
+const config = require('../config')
 const start = Date.now()
 const protocol = process.env.PROTOCOL || config.protocol
 const port = process.env.PORT || config.port
@@ -23,7 +23,7 @@ function sendBootStatus( status ) {
 
 const app = express();
 
-app.use(express.static(`${__dirname}/dist`))
+app.use(express.static(`${__dirname}/../dist`))
 app.use(bodyParser.urlencoded({
   limit: '50mb',
   extended: true
