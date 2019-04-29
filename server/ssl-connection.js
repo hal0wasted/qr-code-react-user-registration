@@ -87,12 +87,12 @@ if (protocol === 'https'){
 	}
 
 	const options = {
-	   key: fs.readFileSync( key ),
-     cert: fs.readFileSync( certificate ),
+	   key: fs.readFileSync(key),
+     cert: fs.readFileSync(certificate),
      passphrase : 'password'
   }
 
-	server = require( 'https' ).createServer( options, app );
+	server = require('https').createServer(options, app)
 
   // start MySQL connection
   // necessary SQL statement to execute for node connection in MySQL 8:
@@ -109,10 +109,10 @@ if (protocol === 'https'){
     else console.log(`error: ${err.stack}`)
   })
 }else{
-  server = require( 'http' ).createServer( app );
+  server = require('http').createServer(app)
 }
 
 server.listen({ port, host }, () => {
   // Tell the parent process that Server has booted.
-  sendBootStatus( 'ready' )
+  sendBootStatus('ready')
 })
