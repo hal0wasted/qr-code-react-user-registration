@@ -15,19 +15,20 @@ class CameraCapture extends Component {
     const host = config.host.getCurrent()
     try {
       const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
-      scan(code.data)
-      const response = await axios.post(`${protocol}://${host}:${port}/userDataSubmit/`, {
-        data: {
-          firstName: userValues.firstName,
-          lastName: userValues.lastName,
-          email: userValues.email,
-          qr: code.data
-        }
-      })
-      if (response.data.message === 'ok'){
-        hideCamera()
+      if(code.data !== 'timeout.'){
+        scan(code.data)
+        const response = await axios.post(`${protocol}://${host}:${port}/userDataSubmit/`, {
+          data: {
+            firstName: userValues.firstName,
+            lastName: userValues.lastName,
+            email: userValues.email,
+            qr: code.data
+          }
+        })
+        if (response.data.message === 'ok') hideCamera()
+        else console.log(`looks like mysql QR insert failed`)
       }else{
-        console.log(`looks like mysql QR insert failed`)
+        console.log('response is taking too long, try another picture')
       }
     }catch(err){
       console.log(err)

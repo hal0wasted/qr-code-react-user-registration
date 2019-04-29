@@ -32,12 +32,15 @@ app.use(express.json({ limit: '50mb' }))
 
 app.post(`/imageOutput`, (req, res) => {
   console.log( req.body.data )
+  const fileName = `output.png`
   const imageData = req.body.data
   const imageBuffer = new Buffer(imageData, 'base64'); //console = <Buffer 75 ab 5a 8a ...
-  const fileName = `output.png`
   fs.writeFile(fileName, imageBuffer, (err) => {
     if (!err) {
       console.log(`successfully wrote ${fileName}`)
+      setTimeout(()=>{
+        if(!res.headersSent){ res.send('timeout.'); console.log('timeout.') }
+      }, 1000)
       decodeQR(fileName, res)
     }
   })

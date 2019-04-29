@@ -25,7 +25,7 @@ function decodeQR(filename, res){
       const qrData = jsQR(pixelArray, pngData.width, pngData.height)
       if (qrData && qrData.data !== null){
         console.log( qrData.data )
-        res.send( qrData.data )
+        if(!res.headersSent) res.send( qrData.data )
       }else{
         console.log('not a valid QR code')
       }
