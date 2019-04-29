@@ -14,6 +14,9 @@ function convertPNGtoByteArray(pngData) {
       data[(y * pngData.width + x) * 4 + 3] = pixelData[3]
     }
   }
+  setTimeout(()=>{
+    return console.log('PNG conversion to array timed out!')
+  }, 5000)
   return data
 }
 

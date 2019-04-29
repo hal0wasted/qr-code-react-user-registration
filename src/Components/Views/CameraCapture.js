@@ -12,7 +12,7 @@ class CameraCapture extends Component {
   }
   outputToImage = async (data) => {
     const { scan, userValues, hideCamera } = this.props
-    const host = config.host.home
+    const host = config.host.getCurrent()
     try {
       const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
       scan(code.data)

@@ -9,7 +9,7 @@ const config = require('../config')
 const start = Date.now()
 const protocol = process.env.PROTOCOL || config.protocol
 const port = process.env.PORT || config.port
-const host = process.env.HOST || config.home
+const host = process.env.HOST || config.host.getCurrent()
 
 let server, dbConnection
 
