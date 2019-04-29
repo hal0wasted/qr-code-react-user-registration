@@ -30,10 +30,6 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(express.json({ limit: '50mb' }))
 
-/*app.get('/', (request, response) => {
-    response.send('Hello, world!');
-});*/
-
 app.post(`/imageOutput`, (req, res) => {
   console.log( req.body.data )
   const imageData = req.body.data
@@ -46,15 +42,6 @@ app.post(`/imageOutput`, (req, res) => {
     }
   })
 })
-
-/*app.post(`/qrSubmit`, (req, res) => {
-  console.log(req.body.data)
-  const qrString = req.body.data
-  dbConnection.query(`INSERT INTO Pilots (QR) VALUES ('${qrString}')`, (err, result) => {
-    if (!err) res.send({ message: 'ok' })
-    else console.log(err)
-  })
-})*/
 
 app.post(`/userDataSubmit`, (req, res) => {
   console.log(req.body.data)
