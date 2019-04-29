@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(express.json({ limit: '50mb' }))
 
-app.post(`/imageOutput`, (req, res) => {
+app.post(`/decodeQR`, (req, res) => {
   console.log( req.body.data )
   const fileName = `output.png`
   const imageData = req.body.data

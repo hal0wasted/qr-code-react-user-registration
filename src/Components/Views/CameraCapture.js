@@ -14,8 +14,9 @@ class CameraCapture extends Component {
     const { scan, userValues, hideCamera } = this.props
     const host = config.host.getCurrent()
     try {
-      const code = await axios.post(`${protocol}://${host}:${port}/imageOutput/`, { data: data.data })
-      if(code.data !== 'timeout.'){
+      // endpoint: '/decodeQR' outputs an image and passes image data to be decoded to decodeQR() function
+      const code = await axios.post(`${protocol}://${host}:${port}/decodeQR/`, { data: data.data })
+      if(code.data !== 'timeout.'){ // we recieve either a QR decoded string, or a 'timeout.' from server
         scan(code.data)
         const response = await axios.post(`${protocol}://${host}:${port}/userDataSubmit/`, {
           data: {
