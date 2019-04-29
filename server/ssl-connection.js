@@ -90,7 +90,7 @@ if (protocol === 'https'){
 	   key: fs.readFileSync( key ),
      cert: fs.readFileSync( certificate ),
      passphrase : 'password'
-  };
+  }
 
 	server = require( 'https' ).createServer( options, app );
 
@@ -108,12 +108,11 @@ if (protocol === 'https'){
     if(!err) console.log(`mysql: connected as id ${dbConnection.threadId}`)
     else console.log(`error: ${err.stack}`)
   })
-
-} else {
-    server = require( 'http' ).createServer( app );
+}else{
+  server = require( 'http' ).createServer( app );
 }
 
-server.listen( { port, host }, function() {
-    // Tell the parent process that Server has booted.
-    sendBootStatus( 'ready' );
-} );
+server.listen({ port, host }, () => {
+  // Tell the parent process that Server has booted.
+  sendBootStatus( 'ready' )
+})
