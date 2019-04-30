@@ -13,5 +13,6 @@ export const mapDispatch = dispatch => ({
   getUserVals: (values) => { dispatch(Actions.getUserVals(values)) },
   showCamera: () => { dispatch(Actions.showCamera) },
   hideCamera: () => { dispatch(Actions.hideCamera) },
-  showUserRegisteredPopUp: () => { dispatch(Action.showUserRegisteredPopUp) }
+  showUserRegisteredPopUp: () => { dispatch(Actions.showUserRegisteredPopUp) },
+  hideUserRegisteredPopUp: () => { dispatch(Actions.hideUserRegisteredPopUp) }
 })

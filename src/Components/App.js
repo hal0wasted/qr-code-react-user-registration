@@ -17,7 +17,7 @@ class App extends Component {
           }} className='app-body'>
           { cameraVisibility === 'hidden' ? <BasicUserData/> : null }
           <CameraCapture/>
-          { userRegisteredPopUpVisibility === 'hidden' ? <UserRegisteredPopUp/> : null }
+          { userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null }
         </div>
       </Fragment>
     )

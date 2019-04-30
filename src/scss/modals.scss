@@ -1,0 +1,21 @@
+.animated-modal {
+  animation: modal-animation .75s ease;
+}
+
+@keyframes modal-animation {
+  0%{
+    transform: scale(0);
+  }
+  60%{
+    transform: scale(1.1);
+  }
+  75%{
+    transform: scale(.95);
+  }
+  90%{
+    transform: scale(1.025);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
