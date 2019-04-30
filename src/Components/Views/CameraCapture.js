@@ -11,7 +11,7 @@ class CameraCapture extends Component {
     return nextProps.cameraVisibility !== this.props.cameraVisibility
   }
   outputToImage = async (data) => {
-    const { scan, userValues, hideCamera } = this.props
+    const { scan, userValues, hideCamera, showUserRegisteredPopUp, hideUserRegisteredPopUp } = this.props
     const host = config.host.getCurrent()
     try {
       // endpoint: '/decodeQR' outputs an image and passes image data to be decoded to decodeQR() function
@@ -26,10 +26,16 @@ class CameraCapture extends Component {
             qr: code.data
           }
         })
-        if (response.data.message === 'ok') hideCamera()
+        if (response.data.message === 'ok'){
+          hideCamera()
+          showUserRegisteredPopUp()
+          setTimeout(() => {
+            hideUserRegisteredPopUp()
+          }, 5000)
+        }
         else console.log(`looks like mysql QR insert failed`)
       }else{
-        console.log('response is taking too long, try another picture')
+        console.log('QR read failed, try another picture')
       }
     }catch(err){
       console.log(err)
