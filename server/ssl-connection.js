@@ -47,7 +47,7 @@ app.post(`/userDataSubmit`, (req, res) => {
   console.log(req.body.data)
   const userData = req.body.data
   console.log(typeof userData.firstName)
-  dbConnection.query(`INSERT INTO Pilots (FirstName, LastName, Email, QR) VALUES ('${userData.firstName}', '${userData.lastName}', '${userData.email}', '${userData.qr}')`, (err, result) => {
+  dbConnection.query(`INSERT INTO Pilots (FirstName, LastName, Email, QR, State) VALUES ('${userData.firstName}', '${userData.lastName}', '${userData.email}', '${userData.qr}', 'REGISTERED')`, (err, result) => {
     if (!err) res.send({ message: 'ok' })
     else console.log(err)
   })
