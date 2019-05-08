@@ -5,12 +5,17 @@ import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../../Actions/DemographicSurveyActionCreators'
 
 class Demographics extends Component {
+  submit = (values) => {
+    console.log(
+      values
+    )
+  }
   render(){
     const title = 'Demographic Survey'
     return (
       <div>
         <Title title={title}/>
-        <DemographicDataForm/>
+        <DemographicDataForm onSubmit={this.submit}/>
       </div>
     )
   }

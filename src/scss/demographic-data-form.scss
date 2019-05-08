@@ -1,0 +1,27 @@
+form {
+  width: 100%;
+}
+
+label {
+}
+
+input[type="radio"] {
+  max-width: 20px;
+  display: inline-block;
+}
+
+input[type="text"]{
+}
+
+label > span {
+  display: block;
+  margin-top: -1.75em;
+  margin-left: 1.75em;
+}
+
+.question-option {
+  width: 50%;
+  display: block;
+  text-align: left;
+  margin: auto;
+}

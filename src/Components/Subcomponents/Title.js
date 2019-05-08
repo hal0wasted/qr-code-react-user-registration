@@ -5,7 +5,7 @@ class Title extends Component {
   render(){
     const { title } = this.props
     return (
-      <div className='view-title'>{title}</div>
+      <h1 className='view-title'>{title}</h1>
     )
   }
 }

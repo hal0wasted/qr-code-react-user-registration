@@ -13,7 +13,7 @@ class App extends Component {
     const { cameraVisibility, userRegisteredPopUpVisibility } = this.props
     return(
       <Fragment>
-        <div style={{ height: innerHeight+'px' }} className='app-body'>
+        <div className='app-body'>
           {/*cameraVisibility === 'hidden' ? <BasicUserData/> : null*/}
           {/*<CameraCapture/>*/}
           <Demographics/>
