@@ -39,6 +39,15 @@ class DemographicDataForm extends Component {
       {id:3, name:'c.) Commercial driver\'s license'},
       {id:4, name:'d.) Prefer not to respond'}
     ]
+    const Q12_options = [
+      {id:1, name:'a.) No experience'},
+      {id:2, name:'b.) A taxicab company'},
+      {id:3, name:'c.) Delivery driver'},
+      {id:4, name:'d.) Peer-to-peer ridesharing (e.g. Uber, Lyft, Sidecar, etc)'},
+      {id:5, name:'e.) Package delivery (e.g. FedEx, UPS, USPS, etc)'},
+      {id:6, name:'f.) Over-the-road (OTR)(i.e. long haul trucking)'},
+      {id:7, name:'g.) Prefer not to respond'}
+    ]
     return (
       <div>
       <div style={{ marginTop:'2em' }}></div>
@@ -314,6 +323,18 @@ class DemographicDataForm extends Component {
           <div>
             <div className="question-option">
               <Field name="Q11" component={CheckboxGroup} options={Q11_options} validate={[required]}/>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q12">
+            <h3>12.	Do you or have you ever operated a motor vehicle for hire in the following (select all that apply):</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <Field name="Q12" component={CheckboxGroup} options={Q12_options} validate={[required]}/>
             </div>
           </div>
         </div>
