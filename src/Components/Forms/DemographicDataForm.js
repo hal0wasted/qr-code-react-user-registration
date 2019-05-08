@@ -4,6 +4,7 @@ import '../../scss/demographic-data-form.scss'
 import { connect } from 'react-redux'
 import _, { flow } from 'lodash'
 import { mapState, mapDispatch } from '../../Actions/DemographicSurveyActionCreators'
+import CheckboxGroup from './CheckboxGroup'
 
 const required = value => value ? undefined : 'Required'
 
@@ -32,6 +33,12 @@ class DemographicDataForm extends Component {
       Q2_selfResponseBoxVisibility,
       Q3_selfResponseBoxVisibility
     } = this.props
+    const Q11_options = [
+      {id:1, name:'a.) I do not have a license'},
+      {id:2, name:'b.) Driver\'s license'},
+      {id:3, name:'c.) Commercial driver\'s license'},
+      {id:4, name:'d.) Prefer not to respond'}
+    ]
     return (
       <div>
       <div style={{ marginTop:'2em' }}></div>
@@ -40,7 +47,7 @@ class DemographicDataForm extends Component {
           <label htmlFor="Q1">
             <h3>What is your age?</h3>
           </label>
-          <div className="question-option" style={{ textAlign:'center' }}>
+          <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
             <Field name="Q1" component="input" type="text" validate={[required]} type="text"/>
           </div>
         </div>
@@ -147,9 +154,175 @@ class DemographicDataForm extends Component {
         </div>
         <br></br>
         <br></br>
-        
+        <div>
+          <label htmlFor="Q5">
+            <h3>What is your marital status?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q5" component="input" type="radio" validate={[required]} value="single never married"/><span>a.) Single, never married</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q5" component="input" type="radio" validate={[required]} value="married or domestic partnership"/><span>b.) Married or domestic partnership</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q5" component="input" type="radio" validate={[required]} value="widowed"/><span>c.) Widowed</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q5" component="input" type="radio" validate={[required]} value="separated"/><span>d.) Separated</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q5" component="input" type="radio" validate={[required]} value="divorced"/><span>e.) Divorced</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q5" component="input" type="radio" validate={[required]} value="prefer not to respond"/><span>f.) Prefer not to respond</span></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q6">
+            <h3>What is your annual income?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="less than $20,000"/><span>a.) Less than $20,000</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="$20,000 to $34,999"/><span>b.) $20,000 to $34,999</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="$35,000 to $49,999"/><span>c.) $35,000 to $49,999</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="$50,000 to $74,999"/><span>d.) $50,000 to $74,999</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="$75,000 to $99,999"/><span>e.) $75,000 to $100,000</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="$100,000 to $149,999"/><span>f.) $100,000 to $149,999</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="$150,000 to $249,999"/><span>g.) $150,000 to $249,999</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="over $250,000"/><span>h.) over $250,000</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q6" component="input" type="radio" validate={[required]} value="Prefer not to respond"/><span>i.) Prefer not to respond</span></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q7">
+            <h3>In what zip code do you live?</h3>
+          </label>
+          <div>
+            <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
+              <label><Field name="Q7" component="input" type="text" validate={[required]} value=""/></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q8">
+            <h3>Do you speak a language other than English?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q8" component="input" type="radio" validate={[required]} value="conversationally"/><span>a.) Conversationally</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q8" component="input" type="radio" validate={[required]} value="fluently"/><span>b.) Fluently</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q8" component="input" type="radio" validate={[required]} value="no"/><span>c.) No</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q8" component="input" type="radio" validate={[required]} value="prefer not to respond"/><span>d.) Prefer not to respond</span></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q9">
+            <h3>What is your occupational field?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="management"/><span>a.) Management (e.g. business, finance, management)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="professional"/><span>b.) Professional (e.g. computer, engineering, legal, healthcare practitioners)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="service"/><span>c.) Service (e.g. healthcare support, protective services, food preparation, personal care, building/grounds)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="sales"/><span>d.) Sales (e.g. sales, customer service, office administration)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="natural resources and construction"/><span>e.) Natural resources and construction (e.g. agriculture, construction, installation, repair)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="production and transportation"/><span>f.) Production and transportation (e.g. factory, commercial transportation, material moving)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="retired"/><span>g.) Retired</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q9" component="input" type="radio" validate={[required]} value="prefer not to respond"/><span>h.) Prefer not to respond</span></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q10">
+            <h3>What is your employment status?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q10" component="input" type="radio" validate={[required]} value="unemployed"/><span>a.) Unemployed</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q10" component="input" type="radio" validate={[required]} value="not in labor force"/><span>b.) Not in labor force (e.g. retired, homemaker, etc.)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q10" component="input" type="radio" validate={[required]} value="employed part-time"/><span>c.) Employed part-time (less than 30 hrs/wk)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q10" component="input" type="radio" validate={[required]} value="employed full-time"/><span>d.) Employed full-time (30 hrs or more/wk)</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q10" component="input" type="radio" validate={[required]} value="prefer not to respond"/><span>e.) Prefer not to respond</span></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q11">
+            <h3>What driving certifications / license have you completed?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <Field name="Q11" component={CheckboxGroup} options={Q11_options} validate={[required]}/>
+            </div>
+          </div>
+        </div>
+
+
+        <div style={{ marginBottom:'60px' }}></div>
         <button type="submit">Submit</button>
       </form>
+      <div style={{ marginBottom:'120px' }}></div>
       </div>
     )
   }
