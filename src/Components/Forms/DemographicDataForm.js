@@ -39,6 +39,8 @@ class DemographicDataForm extends Component {
       {id:3, name:'c.) Commercial driver\'s license'},
       {id:4, name:'d.) Prefer not to respond'}
     ]
+    const Q11_exceptions = [ 'a', 'd' ]
+    const Q11_function = () => { console.log('Q11_function executed') }
     const Q12_options = [
       {id:1, name:'a.) No experience'},
       {id:2, name:'b.) A taxicab company'},
@@ -322,7 +324,7 @@ class DemographicDataForm extends Component {
           </label>
           <div>
             <div className="question-option">
-              <Field name="Q11" component={CheckboxGroup} options={Q11_options} validate={[required]}/>
+              <Field name="Q11" component={CheckboxGroup} options={Q11_options} exceptions={Q11_exceptions} func={Q11_function} validate={[required]}/>
             </div>
           </div>
         </div>

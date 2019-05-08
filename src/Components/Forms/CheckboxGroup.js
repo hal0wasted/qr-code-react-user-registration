@@ -2,7 +2,11 @@ import React from 'react';
 
 class CheckboxGroup extends React.Component {
   checkboxGroup = () => {
-  const { label, required, options, input, meta } = this.props;
+  const { label, required, options, input, meta, letter, exceptions, func } = this.props;
+  console.log(
+    exceptions
+  )
+  func()
   return options.map((option, index) => {
     return (
       <div className="checkbox" key={index}>
@@ -13,10 +17,12 @@ class CheckboxGroup extends React.Component {
                  checked={input.value.indexOf(option.name.slice(4, option.name.length).toLowerCase()) !== -1}
                  onChange={(event) => {
                    const newValue = [...input.value]
+                   const letter = option.name.slice(0, 1)
                    if (event.target.checked) {
                      newValue.push(option.name.slice(4, option.name.length).toLowerCase())
+                     console.log( letter )
                    }else{
-                    newValue.splice(newValue.indexOf(option.name.slice(4, option.name.length).toLowerCase()), 1)
+                     newValue.splice(newValue.indexOf(option.name.slice(4, option.name.length).toLowerCase()), 1)
                    }
                    return input.onChange(newValue)
                   }}/>
