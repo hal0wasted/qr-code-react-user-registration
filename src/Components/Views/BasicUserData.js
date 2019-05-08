@@ -4,8 +4,6 @@ import UserDataForm from '../Forms/UserDataForm'
 import Title from '../Subcomponents/Title'
 import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../../Actions/ActionCreators'
-import { host, protocol, port } from '../../../config'
-import axios from 'axios'
 
 class BasicUserData extends Component {
   submit = (values) => {

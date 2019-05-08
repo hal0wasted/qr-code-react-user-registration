@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Title from '../Subcomponents/Title'
+import DemographicDataForm from '../Forms/DemographicDataForm'
+import { connect } from 'react-redux'
+import { mapState, mapDispatch } from '../../Actions/DemographicSurveyActionCreators'
 
 class Demographics extends Component {
   render(){
@@ -7,9 +10,10 @@ class Demographics extends Component {
     return (
       <div>
         <Title title={title}/>
+        <DemographicDataForm/>
       </div>
     )
   }
 }
 
-export default Demographics
+export default connect(mapState, mapDispatch)(Demographics)

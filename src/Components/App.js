@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { mapState, mapDispatch } from '../Actions/ActionCreators'
 import { Route } from 'react-router-dom'
 import BasicUserData from './Views/BasicUserData'
-// import Demographics from './Views/Demographics'
+import Demographics from './Views/Demographics'
+// import ConsentForm from './Views/ConsentForm'
 import CameraCapture from './Views/CameraCapture'
 import UserRegisteredPopUp from './Subcomponents/UserRegisteredPopUp'
 
@@ -13,9 +14,11 @@ class App extends Component {
     return(
       <Fragment>
         <div style={{ height: innerHeight+'px' }} className='app-body'>
-          { cameraVisibility === 'hidden' ? <BasicUserData/> : null }
-          <CameraCapture/>
-          { userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null }
+          {/*cameraVisibility === 'hidden' ? <BasicUserData/> : null*/}
+          {/*<CameraCapture/>*/}
+          <Demographics/>
+          {/*<ConsentForm/>*/}
+          {/*userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null*/}
         </div>
       </Fragment>
     )
