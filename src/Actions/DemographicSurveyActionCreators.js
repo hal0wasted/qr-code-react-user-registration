@@ -12,5 +12,7 @@ export const mapDispatch = dispatch => ({
   Q2_showSelfResponseBox: () => { dispatch(Actions.Q2_showSelfResponseBox()) },
   Q2_hideSelfResponseBox: () => { dispatch(Actions.Q2_hideSelfResponseBox()) },
   Q3_showSelfResponseBox: () => { dispatch(Actions.Q3_showSelfResponseBox()) },
-  Q3_hideSelfResponseBox: () => { dispatch(Actions.Q3_hideSelfResponseBox()) }
+  Q3_hideSelfResponseBox: () => { dispatch(Actions.Q3_hideSelfResponseBox()) },
+  Q12_showQ12a: () => { dispatch(Actions.Q12_showQ12a()) },
+  Q12_hideQ12a: () => { dispatch(Actions.Q12_hideQ12a()) }
 })

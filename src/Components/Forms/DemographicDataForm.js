@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import '../../scss/demographic-data-form.scss'
 import { connect } from 'react-redux'
@@ -31,19 +31,16 @@ class DemographicDataForm extends Component {
     change('Q3-selfResponseBox', null)
   }
   Q12_check = () => {
-    // const { Q12_checkAction } = this.props
-    console.log(
-      'Q12_check action'
-    )
+    const { Q12_showQ12a } = this.props
+    Q12_showQ12a()
   }
   Q12_checkException = () => {
-    // const { Q12_checkExceptionAction } = this.props
-    console.log(
-      'Q12_checkException action'
-    )
+    const { change, Q12_hideQ12a } = this.props
+    Q12_hideQ12a()
+    change('Q12a', null)
   }
   Q12_uncheck = () => {
-    // const { Q12_uncheckAction } = this.props
+    // const {  } = this.props
     console.log(
       'Q12_uncheck action'
     )
@@ -53,7 +50,6 @@ class DemographicDataForm extends Component {
       handleSubmit,
       Q2_selfResponseBoxVisibility,
       Q3_selfResponseBoxVisibility,
-      // need to create these props below
       Q12a_visibility
 
     } = this.props
@@ -80,7 +76,7 @@ class DemographicDataForm extends Component {
       <form onSubmit={ this.props.handleSubmit }>
         <div>
           <label htmlFor="Q1">
-            <h3>What is your age?</h3>
+            <h3>1. What is your age?</h3>
           </label>
           <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
             <Field name="Q1" component="input" type="text" validate={[required]} type="text"/>
@@ -90,7 +86,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q2">
-            <h3>What is your gender?</h3>
+            <h3>2. What is your gender?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -112,7 +108,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q3">
-            <h3>Please specify your ethnicity (or race)</h3>
+            <h3>3. Please specify your ethnicity (or race)</h3>
           </label>
           <div>
             <div className="question-option">
@@ -146,7 +142,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q4">
-            <h3>What is the highest degree or level of school you have completed?</h3>
+            <h3>4. What is the highest degree or level of school you have completed?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -191,7 +187,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q5">
-            <h3>What is your marital status?</h3>
+            <h3>5. What is your marital status?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -218,7 +214,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q6">
-            <h3>What is your annual income?</h3>
+            <h3>6. What is your annual income?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -254,7 +250,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q7">
-            <h3>In what zip code do you live?</h3>
+            <h3>7. In what zip code do you live?</h3>
           </label>
           <div>
             <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
@@ -266,7 +262,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q8">
-            <h3>Do you speak a language other than English?</h3>
+            <h3>8. Do you speak a language other than English?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -287,7 +283,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q9">
-            <h3>What is your occupational field?</h3>
+            <h3>9. What is your occupational field?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -320,7 +316,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q10">
-            <h3>What is your employment status?</h3>
+            <h3>10. What is your employment status?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -344,7 +340,7 @@ class DemographicDataForm extends Component {
         <br></br>
         <div>
           <label htmlFor="Q11">
-            <h3>What driving certifications / license have you completed?</h3>
+            <h3>11. What driving certifications / license have you completed?</h3>
           </label>
           <div>
             <div className="question-option">
@@ -370,23 +366,27 @@ class DemographicDataForm extends Component {
         <br></br>
         <br></br>
         {
-          /*
           Q12a_visibility === 'visible'
           ?
           <Fragment>
             <div>
               <label htmlFor="Q12a">
-                <h3>What is your employment status?</h3>
+                <h3>12a. How long did you operate a motor vehicle for hire?</h3>
               </label>
               <div>
                 <div className="question-option">
-                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="unemployed"/><span>a.) Unemployed</span></label>
+                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="less than 1 year"/><span>a.) Less than 1 year</span></label>
+                </div>
+                <div className="question-option">
+                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="between 2 and 5 years"/><span>b.) Between 2 and 5 years</span></label>
+                </div>
+                <div className="question-option">
+                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="greater than 5 years"/><span>c.) Greater than 5 years</span></label>
                 </div>
               </div>
             </div>
           </Fragment>
           : null
-          */
         }
 
         <div style={{ marginBottom:'60px' }}></div>

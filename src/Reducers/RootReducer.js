@@ -7,12 +7,14 @@ import cameraVisibility from './cameraVisibility'
 import userRegisteredPopUpVisibility from './userRegisteredPopUpVisibility'
 import Q2_selfResponseBoxVisibility from './Q2selfResponseBoxVisibility'
 import Q3_selfResponseBoxVisibility from './Q3selfResponseBoxVisibility'
+import Q12a_visibility from './Q12a_visibility'
 import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
   // demographicData
   Q2_selfResponseBoxVisibility: Q2_selfResponseBoxVisibility,
   Q3_selfResponseBoxVisibility: Q3_selfResponseBoxVisibility,
+  Q12a_visibility: Q12a_visibility,
   //
   userRegisteredPopUpVisibility: userRegisteredPopUpVisibility,
   cameraVisibility: cameraVisibility,
