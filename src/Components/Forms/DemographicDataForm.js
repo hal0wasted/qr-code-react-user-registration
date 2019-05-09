@@ -50,6 +50,7 @@ class DemographicDataForm extends Component {
       {id:6, name:'f.) Over-the-road (OTR)(i.e. long haul trucking)'},
       {id:7, name:'g.) Prefer not to respond'}
     ]
+    const Q12_exceptions = [ 'a', 'g' ]
     return (
       <div>
       <div style={{ marginTop:'2em' }}></div>
@@ -336,7 +337,7 @@ class DemographicDataForm extends Component {
           </label>
           <div>
             <div className="question-option">
-              <Field name="Q12" component={CheckboxGroup} options={Q12_options} validate={[required]}/>
+              <Field name="Q12" component={CheckboxGroup} options={Q12_options} exceptions={Q12_exceptions} validate={[required]}/>
             </div>
           </div>
         </div>
