@@ -6,6 +6,9 @@ import _, { flow } from 'lodash'
 import { mapState, mapDispatch } from '../../Actions/DemographicSurveyActionCreators'
 import CheckboxGroup from './CheckboxGroup'
 
+// For multi-checkbox option questions, we'll need to add an additional check upon submission that says,
+// If the array is empty (length of 0) then we submit 'prefer not to respond'
+
 const required = value => value ? undefined : 'Required'
 
 class DemographicDataForm extends Component {
@@ -27,11 +30,32 @@ class DemographicDataForm extends Component {
     Q3_hideSelfResponseBox()
     change('Q3-selfResponseBox', null)
   }
+  Q12_check = () => {
+    // const { Q12_checkAction } = this.props
+    console.log(
+      'Q12_check action'
+    )
+  }
+  Q12_checkException = () => {
+    // const { Q12_checkExceptionAction } = this.props
+    console.log(
+      'Q12_checkException action'
+    )
+  }
+  Q12_uncheck = () => {
+    // const { Q12_uncheckAction } = this.props
+    console.log(
+      'Q12_uncheck action'
+    )
+  }
   render(){
     const {
       handleSubmit,
       Q2_selfResponseBoxVisibility,
-      Q3_selfResponseBoxVisibility
+      Q3_selfResponseBoxVisibility,
+      // need to create these props below
+      Q12a_visibility
+
     } = this.props
     const Q11_options = [
       {id:1, name:'a.) I do not have a license'},
@@ -40,7 +64,6 @@ class DemographicDataForm extends Component {
       {id:4, name:'d.) Prefer not to respond'}
     ]
     const Q11_exceptions = [ 'a', 'd' ]
-    const Q11_function = () => { console.log('Q11_function executed') }
     const Q12_options = [
       {id:1, name:'a.) No experience'},
       {id:2, name:'b.) A taxicab company'},
@@ -325,7 +348,8 @@ class DemographicDataForm extends Component {
           </label>
           <div>
             <div className="question-option">
-              <Field name="Q11" component={CheckboxGroup} options={Q11_options} exceptions={Q11_exceptions} func={Q11_function} validate={[required]}/>
+              <Field name="Q11" component={CheckboxGroup} options={Q11_options} validate={[required]}
+                exceptions={Q11_exceptions}/>
             </div>
           </div>
         </div>
@@ -337,11 +361,33 @@ class DemographicDataForm extends Component {
           </label>
           <div>
             <div className="question-option">
-              <Field name="Q12" component={CheckboxGroup} options={Q12_options} exceptions={Q12_exceptions} validate={[required]}/>
+              <Field name="Q12" component={CheckboxGroup} options={Q12_options} exceptions={Q12_exceptions}
+                check={this.Q12_check} checkException={this.Q12_checkException} uncheck={this.Q12_uncheck}
+                validate={[required]}/>
             </div>
           </div>
         </div>
-
+        <br></br>
+        <br></br>
+        {
+          /*
+          Q12a_visibility === 'visible'
+          ?
+          <Fragment>
+            <div>
+              <label htmlFor="Q12a">
+                <h3>What is your employment status?</h3>
+              </label>
+              <div>
+                <div className="question-option">
+                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="unemployed"/><span>a.) Unemployed</span></label>
+                </div>
+              </div>
+            </div>
+          </Fragment>
+          : null
+          */
+        }
 
         <div style={{ marginBottom:'60px' }}></div>
         <button type="submit">Submit</button>
