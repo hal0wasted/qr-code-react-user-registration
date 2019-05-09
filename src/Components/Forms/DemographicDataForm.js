@@ -45,6 +45,15 @@ class DemographicDataForm extends Component {
       'Q12_uncheck action'
     )
   }
+  Q13_check = () => {
+
+  }
+  Q13_checkException = () => {
+
+  }
+  Q13_uncheck = () => {
+    
+  }
   render(){
     const {
       handleSubmit,
@@ -70,6 +79,18 @@ class DemographicDataForm extends Component {
       {id:7, name:'g.) Prefer not to respond'}
     ]
     const Q12_exceptions = [ 'a', 'g' ]
+    const Q13_options = [
+      {id:1, name:'a.) Sports (e.g. working out, running, biking, basketball, etc)'},
+      {id:2, name:'b.) Outdoor activities (e.g. hiking, hunting, boating, etc)'},
+      {id:3, name:'c.) Arts & crafts (e.g. painting, woodworking, DIY, etc)'},
+      {id:4, name:'d.) Working on motor vehicles (e.g. motorcycle, car, etc)'},
+      {id:5, name:'e.) Technical (e.g. computer programming, HAM radio, electronics, etc)'},
+      {id:6, name:'f.) Remote control aircraft / drones'},
+      {id:7, name:'g.) Video games'},
+      {id:8, name:'h.) None of the above'},
+      {id:9, name:'i.) Prefer not to respond'}
+    ]
+    const Q13_exceptions = [ 'h', 'i' ]
     return (
       <div>
       <div style={{ marginTop:'2em' }}></div>
@@ -388,6 +409,20 @@ class DemographicDataForm extends Component {
           </Fragment>
           : null
         }
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q13">
+            <h3>13.	I participate in the following leisure activities (select all that apply):</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <Field name="Q13" component={CheckboxGroup} options={Q13_options} exceptions={Q13_exceptions}
+                check={this.Q13_check} checkException={this.Q13_checkException} uncheck={this.Q13_uncheck}
+                validate={[required]}/>
+            </div>
+          </div>
+        </div>
 
         <div style={{ marginBottom:'60px' }}></div>
         <button type="submit">Submit</button>
