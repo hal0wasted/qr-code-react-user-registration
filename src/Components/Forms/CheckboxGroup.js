@@ -21,6 +21,7 @@ class CheckboxGroup extends React.Component {
                        newValue.splice(0, newValue.length)
                        newValue.push(value)
                        checkException ? checkException() : null
+                       options.forEach(op => { if (op.actions) op.actions.uncheck() })
                      } else {
                        if (newValue[0] === 'none of the above'
                           || newValue[0] === 'prefer not to respond'

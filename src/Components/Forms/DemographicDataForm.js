@@ -54,6 +54,27 @@ class DemographicDataForm extends Component {
     Q13_hideQ13a()
     change('Q13a', null)
   }
+  Q13_checkbox_f = () => {
+    const { Q13_showQ13b } = this.props
+    Q13_showQ13b()
+  }
+  Q13_uncheckbox_f = () => {
+    const { change, Q13_hideQ13b } = this.props
+    Q13_hideQ13b()
+    change('Q13b', null)
+  }
+  Q13_checkbox_g = () => {
+    const { Q13_showQ13c, Q13_showQ13d } = this.props
+    Q13_showQ13c()
+    Q13_showQ13d()
+  }
+  Q13_uncheckbox_g = () => {
+    const { change, Q13_hideQ13c, Q13_hideQ13d } = this.props
+    Q13_hideQ13c()
+    Q13_hideQ13d()
+    change('Q13c', null)
+    change('Q13d', null)
+  }
   render(){
     const {
       handleSubmit,
@@ -61,12 +82,9 @@ class DemographicDataForm extends Component {
       Q3_selfResponseBoxVisibility,
       Q12a_visibility,
       Q13a_visibility,
-      Q13_showQ13b,
-      Q13_hideQ13b,
-      Q13_showQ13c,
-      Q13_hideQ13c,
-      Q13_showQ13d,
-      Q13_hideQ13d
+      Q13b_visibility,
+      Q13c_visibility,
+      Q13d_visibility
     } = this.props
     const Q11_options = [
       {id:1, name:'a.) I do not have a license'},
@@ -91,12 +109,21 @@ class DemographicDataForm extends Component {
       {id:3, name:'c.) Arts & crafts (e.g. painting, woodworking, DIY, etc)'},
       {id:4, name:'d.) Working on motor vehicles (e.g. motorcycle, car, etc)'},
       {id:5, actions:{ check:this.Q13_checkbox_e, uncheck:this.Q13_uncheckbox_e }, name:'e.) Technical (e.g. computer programming, HAM radio, electronics, etc)'},
-      {id:6, name:'f.) Remote control aircraft / drones'},
-      {id:7, name:'g.) Video games'},
+      {id:6, actions:{ check:this.Q13_checkbox_f, uncheck:this.Q13_uncheckbox_f }, name:'f.) Remote control aircraft / drones'},
+      {id:7, actions:{ check:this.Q13_checkbox_g, uncheck:this.Q13_uncheckbox_g }, name:'g.) Video games'},
       {id:8, name:'h.) None of the above'},
       {id:9, name:'i.) Prefer not to respond'}
     ]
     const Q13_exceptions = [ 'h', 'i' ]
+    const Q13d_options = [
+      {id:1, name:'a.) Role playing (Call of Duty, Assassins Creed, etc.)'},
+      {id:2, name:'b.) Sports (UFC3, MLB 18, NBA 2K18, etc.)'},
+      {id:3, name:'c.) Simulation (Minecraft, The Sims, etc.)'},
+      {id:4, name:'d.) Arcade (Candy Crush, Tetric, Donkey Kongs, etc.)'},
+      {id:5, name:'e.) Augmented / Virtual Reality (Pokemon Go, House of The Dying Sun, etc.)'},
+      {id:6, name:'f.) Automobile racing (Mario Kart, Grand Theft Auto, etc.)'},
+      {id:7, name:'g.) Flight (X-Plane, FSX, IL-2 Sturmovik, etc.)'}
+    ]
     return (
       <div>
       <div style={{ marginTop:'2em' }}></div>
@@ -441,6 +468,60 @@ class DemographicDataForm extends Component {
                 <label><Field name="Q13a" component="input" type="text" validate={[required]} value=""/></label>
               </div>
             </div>
+          </div>
+          : null
+        }
+        <br></br>
+        <br></br>
+        {
+          Q13b_visibility === 'visible'
+          ?
+          <div>
+            <label htmlFor="Q13b">
+              <h3>13b. How many years have you operated remote controlled aircraft?</h3>
+            </label>
+            <div>
+              <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
+                <label><Field name="Q13b" component="input" type="text" validate={[required]} value=""/></label>
+              </div>
+            </div>
+          </div>
+          : null
+        }
+        <br></br>
+        <br></br>
+        {
+          Q13c_visibility === 'visible'
+          ?
+          <div>
+          <div>
+            <label htmlFor="Q13c">
+              <h3>13c. How many hours per week do you play video games?</h3>
+            </label>
+            <div>
+              <div className="question-option">
+                <label><Field name="Q13c" component="input" type="radio" validate={[required]} value="less than 5 hours per week"/><span>a.) Less than 5 hours per week</span></label>
+              </div>
+              <div className="question-option">
+                <label><Field name="Q13c" component="input" type="radio" validate={[required]} value="between 6 and 10 hours per week"/><span>b.) Between 6 and 10 hours per week</span></label>
+              </div>
+              <div className="question-option">
+                <label><Field name="Q13c" component="input" type="radio" validate={[required]} value="greater than 10 hours per week"/><span>c.) Greater than 10 hours per week</span></label>
+              </div>
+            </div>
+          </div>
+          <br></br>
+          <br></br>
+          <div>
+            <label htmlFor="Q13d">
+              <h3>13d.	What type of video games do you play? (select all that apply)</h3>
+            </label>
+            <div>
+              <div className="question-option">
+                <Field name="Q13d" component={CheckboxGroup} options={Q13d_options} exceptions={[]} validate={[required]}/>
+              </div>
+            </div>
+          </div>
           </div>
           : null
         }
