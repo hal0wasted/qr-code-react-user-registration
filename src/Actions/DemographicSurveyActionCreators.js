@@ -14,5 +14,13 @@ export const mapDispatch = dispatch => ({
   Q3_showSelfResponseBox: () => { dispatch(Actions.Q3_showSelfResponseBox()) },
   Q3_hideSelfResponseBox: () => { dispatch(Actions.Q3_hideSelfResponseBox()) },
   Q12_showQ12a: () => { dispatch(Actions.Q12_showQ12a()) },
-  Q12_hideQ12a: () => { dispatch(Actions.Q12_hideQ12a()) }
+  Q12_hideQ12a: () => { dispatch(Actions.Q12_hideQ12a()) },
+  Q13_showQ13a: () => { dispatch(Actions.Q13_showQ13a()) },
+  Q13_hideQ13a: () => { dispatch(Actions.Q13_hideQ13a()) },
+  Q13_showQ13b: () => { dispatch(Actions.Q13_showQ13b()) },
+  Q13_hideQ13b: () => { dispatch(Actions.Q13_hideQ13b()) },
+  Q13_showQ13c: () => { dispatch(Actions.Q13_showQ13c()) },
+  Q13_hideQ13c: () => { dispatch(Actions.Q13_hideQ13c()) },
+  Q13_showQ13d: () => { dispatch(Actions.Q13_showQ13d()) },
+  Q13_hideQ13d: () => { dispatch(Actions.Q13_hideQ13d()) }
 })

@@ -45,22 +45,28 @@ class DemographicDataForm extends Component {
       'Q12_uncheck action'
     )
   }
-  Q13_check = () => {
-
+  Q13_checkbox_e = () => {
+    const { Q13_showQ13a } = this.props
+    Q13_showQ13a()
   }
-  Q13_checkException = () => {
-
-  }
-  Q13_uncheck = () => {
-    
+  Q13_uncheckbox_e = () => {
+    const { change, Q13_hideQ13a } = this.props
+    Q13_hideQ13a()
+    change('Q13a', null)
   }
   render(){
     const {
       handleSubmit,
       Q2_selfResponseBoxVisibility,
       Q3_selfResponseBoxVisibility,
-      Q12a_visibility
-
+      Q12a_visibility,
+      Q13a_visibility,
+      Q13_showQ13b,
+      Q13_hideQ13b,
+      Q13_showQ13c,
+      Q13_hideQ13c,
+      Q13_showQ13d,
+      Q13_hideQ13d
     } = this.props
     const Q11_options = [
       {id:1, name:'a.) I do not have a license'},
@@ -84,7 +90,7 @@ class DemographicDataForm extends Component {
       {id:2, name:'b.) Outdoor activities (e.g. hiking, hunting, boating, etc)'},
       {id:3, name:'c.) Arts & crafts (e.g. painting, woodworking, DIY, etc)'},
       {id:4, name:'d.) Working on motor vehicles (e.g. motorcycle, car, etc)'},
-      {id:5, name:'e.) Technical (e.g. computer programming, HAM radio, electronics, etc)'},
+      {id:5, actions:{ check:this.Q13_checkbox_e, uncheck:this.Q13_uncheckbox_e }, name:'e.) Technical (e.g. computer programming, HAM radio, electronics, etc)'},
       {id:6, name:'f.) Remote control aircraft / drones'},
       {id:7, name:'g.) Video games'},
       {id:8, name:'h.) None of the above'},
@@ -389,24 +395,22 @@ class DemographicDataForm extends Component {
         {
           Q12a_visibility === 'visible'
           ?
-          <Fragment>
+          <div>
+            <label htmlFor="Q12a">
+              <h3>12a. How long did you operate a motor vehicle for hire?</h3>
+            </label>
             <div>
-              <label htmlFor="Q12a">
-                <h3>12a. How long did you operate a motor vehicle for hire?</h3>
-              </label>
-              <div>
-                <div className="question-option">
-                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="less than 1 year"/><span>a.) Less than 1 year</span></label>
-                </div>
-                <div className="question-option">
-                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="between 2 and 5 years"/><span>b.) Between 2 and 5 years</span></label>
-                </div>
-                <div className="question-option">
-                  <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="greater than 5 years"/><span>c.) Greater than 5 years</span></label>
-                </div>
+              <div className="question-option">
+                <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="less than 1 year"/><span>a.) Less than 1 year</span></label>
+              </div>
+              <div className="question-option">
+                <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="between 2 and 5 years"/><span>b.) Between 2 and 5 years</span></label>
+              </div>
+              <div className="question-option">
+                <label><Field name="Q12a" component="input" type="radio" validate={[required]} value="greater than 5 years"/><span>c.) Greater than 5 years</span></label>
               </div>
             </div>
-          </Fragment>
+          </div>
           : null
         }
         <br></br>
@@ -423,6 +427,23 @@ class DemographicDataForm extends Component {
             </div>
           </div>
         </div>
+        <br></br>
+        <br></br>
+        {
+          Q13a_visibility === 'visible'
+          ?
+          <div>
+            <label htmlFor="Q13a">
+              <h3>13a. What technical hobbies do you enjoy (please specify)?</h3>
+            </label>
+            <div>
+              <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
+                <label><Field name="Q13a" component="input" type="text" validate={[required]} value=""/></label>
+              </div>
+            </div>
+          </div>
+          : null
+        }
 
         <div style={{ marginBottom:'60px' }}></div>
         <button type="submit">Submit</button>

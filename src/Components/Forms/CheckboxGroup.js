@@ -28,10 +28,13 @@ class CheckboxGroup extends React.Component {
                          newValue.shift()
                        }
                        newValue.push(value)
+                       check ? check() : null
+                       if (option.actions) option.actions.check()
                      }
                    }else{
                      newValue.splice(newValue.indexOf(value), 1)
                      uncheck ? uncheck() : null
+                     if (option.actions) option.actions.uncheck()
                    }
                    return input.onChange(newValue)
                   }}/>

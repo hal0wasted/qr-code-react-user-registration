@@ -7,7 +7,15 @@ const Actions = {
   Q3_showSelfResponseBox: () => ({ type: Types.Q3_SHOW_SELF_RESPONSE_BOX, payload: 'visible' }),
   Q3_hideSelfResponseBox: () => ({ type: Types.Q3_HIDE_SELF_RESPONSE_BOX, payload: 'hidden' }),
   Q12_showQ12a: () => ({ type: Types.Q12_SHOW_Q12A, payload: 'visible' }),
-  Q12_hideQ12a: () => ({ type: Types.Q12_HIDE_Q12A, payload: 'hidden' })
+  Q12_hideQ12a: () => ({ type: Types.Q12_HIDE_Q12A, payload: 'hidden' }),
+  Q13_showQ13a: () => ({ type: Types.Q13_SHOW_Q13A, payload: 'visible' }),
+  Q13_hideQ13a: () => ({ type: Types.Q13_HIDE_Q13A, payload: 'hidden' }),
+  Q13_showQ13b: () => ({ type: Types.Q13_SHOW_Q13B, payload: 'visible' }),
+  Q13_hideQ13b: () => ({ type: Types.Q13_HIDE_Q13B, payload: 'hidden' }),
+  Q13_showQ13c: () => ({ type: Types.Q13_SHOW_Q13C, payload: 'visible' }),
+  Q13_hideQ13c: () => ({ type: Types.Q13_HIDE_Q13C, payload: 'hidden' }),
+  Q13_showQ13d: () => ({ type: Types.Q13_SHOW_Q13D, payload: 'visible' }),
+  Q13_hideQ13d: () => ({ type: Types.Q13_HIDE_Q13D, payload: 'hidden' })
 }
 
 export default Actions
