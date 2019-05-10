@@ -111,6 +111,7 @@ class DemographicDataForm extends Component {
   }
   render(){
     const {
+      change,
       handleSubmit,
       Q2_selfResponseBoxVisibility,
       Q3_selfResponseBoxVisibility,
@@ -170,7 +171,16 @@ class DemographicDataForm extends Component {
             <h3>1. What is your age?</h3>
           </label>
           <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
-            <Field name="Q1" component="input" type="text" validate={[required]} type="text"/>
+            {/*<Field name="Q1" component="input" type="text" validate={[required]} type="text"/>*/}
+            <input name="Q1" type="text"
+              ref={ (el) => this.Q1_input = el }
+              onBlur={() => {
+                if (this.Q1_input === null){
+                  change('Q1', undefined)
+                }else{
+                  change('Q1', this.Q1_input.value)
+                }
+              }}></input>
           </div>
         </div>
         <br></br>
@@ -502,7 +512,18 @@ class DemographicDataForm extends Component {
             </label>
             <div>
               <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
-                <label><Field name="Q13a" component="input" type="text" validate={[required]} value=""/></label>
+                <label>
+                  {/*<Field name="Q13a" component="input" type="text" validate={[required]} value=""/>*/}
+                  <input name="Q13a" type="text"
+                    ref={ (el) => this.Q13a_input = el }
+                    onBlur={() => {
+                      if (this.Q13a_input === null){
+                        change('Q13a', undefined)
+                      }else{
+                        change('Q13a', this.Q13a_input.value)
+                      }
+                    }}></input>
+                </label>
               </div>
             </div>
           </div>
@@ -519,7 +540,18 @@ class DemographicDataForm extends Component {
             </label>
             <div>
               <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
-                <label><Field name="Q13b" component="input" type="text" validate={[required]} value=""/></label>
+                <label>
+                  {/*<Field name="Q13b" component="input" type="text" validate={[required]} value=""/>*/}
+                  <input name="Q13b" type="text"
+                    ref={ (el) => this.Q13b_input = el }
+                    onBlur={() => {
+                      if (this.Q13b_input === null){
+                        change('Q13b', undefined)
+                      }else{
+                        change('Q13b', this.Q13b_input.value)
+                      }
+                    }}></input>
+                </label>
               </div>
             </div>
           </div>
@@ -600,7 +632,18 @@ class DemographicDataForm extends Component {
               </label>
               <div>
                 <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
-                  <label><Field name="Q14a" component="input" type="text" validate={[required]} value=""/></label>
+                  <label>
+                    {/*<Field name="Q14a" component="input" type="text" validate={[required]} value=""/>*/}
+                    <input name="Q14a" type="text"
+                      ref={ (el) => this.Q14a_input = el }
+                      onBlur={() => {
+                        if (this.Q14a_input === null){
+                          change('Q14a', undefined)
+                        }else{
+                          change('Q14a', this.Q14a_input.value)
+                        }
+                      }}></input>
+                  </label>
                 </div>
               </div>
             </div>
@@ -610,7 +653,18 @@ class DemographicDataForm extends Component {
               </label>
               <div>
                 <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
-                  <label><Field name="Q14b" component="input" type="text" validate={[required]} value=""/></label>
+                  <label>
+                    {/*<Field name="Q14b" component="input" type="text" validate={[required]} value=""/>*/}
+                    <input name="Q14b" type="text"
+                      ref={ (el) => this.Q14b_input = el }
+                      onBlur={() => {
+                        if (this.Q14b_input === null){
+                          change('Q14b', undefined)
+                        }else{
+                          change('Q14b', this.Q14b_input.value)
+                        }
+                      }}></input>
+                  </label>
                 </div>
               </div>
             </div>
