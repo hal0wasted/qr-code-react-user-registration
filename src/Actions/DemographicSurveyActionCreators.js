@@ -22,5 +22,11 @@ export const mapDispatch = dispatch => ({
   Q13_showQ13c: () => { dispatch(Actions.Q13_showQ13c()) },
   Q13_hideQ13c: () => { dispatch(Actions.Q13_hideQ13c()) },
   Q13_showQ13d: () => { dispatch(Actions.Q13_showQ13d()) },
-  Q13_hideQ13d: () => { dispatch(Actions.Q13_hideQ13d()) }
+  Q13_hideQ13d: () => { dispatch(Actions.Q13_hideQ13d()) },
+  Q14_showQ14a: () => { dispatch(Actions.Q14_showQ14a()) },
+  Q14_hideQ14a: () => { dispatch(Actions.Q14_hideQ14a()) },
+  Q14_showQ14b: () => { dispatch(Actions.Q14_showQ14b()) },
+  Q14_hideQ14b: () => { dispatch(Actions.Q14_hideQ14b()) },
+  Q14_showQ14c: () => { dispatch(Actions.Q14_showQ14c()) },
+  Q14_hideQ14c: () => { dispatch(Actions.Q14_hideQ14c()) }
 })

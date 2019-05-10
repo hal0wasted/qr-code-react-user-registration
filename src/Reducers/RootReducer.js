@@ -14,6 +14,11 @@ import {
   Q13c_visibility,
   Q13d_visibility
 } from './Q13abcd_visibility'
+import {
+  Q14a_visibility,
+  Q14b_visibility,
+  Q14c_visibility
+} from './Q14abc_visibility'
 import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
@@ -25,6 +30,9 @@ export default combineReducers({
   Q13b_visibility: Q13b_visibility,
   Q13c_visibility: Q13c_visibility,
   Q13d_visibility: Q13d_visibility,
+  Q14a_visibility: Q14a_visibility,
+  Q14b_visibility: Q14b_visibility,
+  Q14c_visibility: Q14c_visibility,
   //
   userRegisteredPopUpVisibility: userRegisteredPopUpVisibility,
   cameraVisibility: cameraVisibility,

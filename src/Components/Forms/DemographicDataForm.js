@@ -40,10 +40,7 @@ class DemographicDataForm extends Component {
     change('Q12a', null)
   }
   Q12_uncheck = () => {
-    // const {  } = this.props
-    console.log(
-      'Q12_uncheck action'
-    )
+    console.log('Q12_uncheck action')
   }
   Q13_checkbox_e = () => {
     const { Q13_showQ13a } = this.props
@@ -75,6 +72,43 @@ class DemographicDataForm extends Component {
     change('Q13c', null)
     change('Q13d', null)
   }
+  Q14_showQ14a = () => {
+    const { Q14_showQ14a } = this.props
+    Q14_showQ14a()
+  }
+  Q14_hideQ14a = () => {
+    const { change, Q14_hideQ14a } = this.props
+    Q14_hideQ14a()
+    change('Q14a', null)
+  }
+  Q14_showQ14b = () => {
+    const { Q14_showQ14b } = this.props
+    Q14_showQ14b()
+  }
+  Q14_hideQ14b = () => {
+    const { change, Q14_hideQ14b } = this.props
+    Q14_hideQ14b()
+    change('Q14b', null)
+  }
+  Q14_showQ14c = () => {
+    const { Q14_showQ14c } = this.props
+    Q14_showQ14c()
+  }
+  Q14_hideQ14c = () => {
+    const { change, Q14_hideQ14c } = this.props
+    Q14_hideQ14c()
+    change('Q14c', null)
+  }
+  Q14_showAllSuboptions = () => {
+    this.Q14_showQ14a()
+    this.Q14_showQ14b()
+    this.Q14_showQ14c()
+  }
+  Q14_hideAllSuboptions = () => {
+    this.Q14_hideQ14a()
+    this.Q14_hideQ14b()
+    this.Q14_hideQ14c()
+  }
   render(){
     const {
       handleSubmit,
@@ -84,7 +118,10 @@ class DemographicDataForm extends Component {
       Q13a_visibility,
       Q13b_visibility,
       Q13c_visibility,
-      Q13d_visibility
+      Q13d_visibility,
+      Q14a_visibility,
+      Q14b_visibility,
+      Q14c_visibility
     } = this.props
     const Q11_options = [
       {id:1, name:'a.) I do not have a license'},
@@ -525,7 +562,116 @@ class DemographicDataForm extends Component {
           </div>
           : null
         }
-
+        <br></br>
+        <br></br>
+        <div>
+          <label htmlFor="Q14">
+            <h3>14. What is your aviation experience?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field onClick={this.Q14_hideAllSuboptions} name="Q14" component="input" type="radio" validate={[required]} value="no experience"/><span>a.) No experience</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field onClick={this.Q14_showAllSuboptions} name="Q14" component="input" type="radio" validate={[required]} value="some flight training"/><span>b.) Some flight training</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field onClick={this.Q14_showAllSuboptions} name="Q14" component="input" type="radio" validate={[required]} value="private pilot training"/><span>c.) Private pilot training</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field onClick={this.Q14_showAllSuboptions} name="Q14" component="input" type="radio" validate={[required]} value="commercial or ATP pilot license"/><span>d.) Commercial or ATP pilot license</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field onClick={this.Q14_hideAllSuboptions} name="Q14" component="input" type="radio" validate={[required]} value="prefer not to respond"/><span>e.) Prefer not to respond</span></label>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        {
+          Q14a_visibility === 'visible' &&
+          Q14b_visibility === 'visible' &&
+          Q14c_visibility === 'visible'
+          ?
+          <div>
+            <div>
+              <label htmlFor="Q14a">
+                <h3>14a. How many total simulator hours do you have?</h3>
+              </label>
+              <div>
+                <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
+                  <label><Field name="Q14a" component="input" type="text" validate={[required]} value=""/></label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label htmlFor="Q14b">
+                <h3>14b. How many total flight hours do you have?</h3>
+              </label>
+              <div>
+                <div className="question-option" style={{ textAlign:'center', width:'50%' }}>
+                  <label><Field name="Q14b" component="input" type="text" validate={[required]} value=""/></label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label htmlFor="Q14c">
+                <h3>14c. My flight experience is in:</h3>
+              </label>
+              <div>
+                <div className="question-option">
+                  <label><Field name="Q14c" component="input" type="radio" validate={[required]} value="fixed wing aircraft"/><span>a.) Fixed wing aircraft</span></label>
+                </div>
+                <div className="question-option">
+                  <label><Field name="Q14c" component="input" type="radio" validate={[required]} value="rotary wing aircraft"/><span>b.) Rotary wing aircraft</span></label>
+                </div>
+                <div className="question-option">
+                  <label><Field name="Q14c" component="input" type="radio" validate={[required]} value="both"/><span>c.) Both</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          : null
+        }
+        <div>
+          <label htmlFor="Q15">
+            <h3>15. Would you fly in an Air Taxi operated by a Pilot?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q15" component="input" type="radio" validate={[required]} value="yes"/><span>a.) Yes</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q15" component="input" type="radio" validate={[required]} value="no"/><span>b.) No</span></label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label htmlFor="Q16">
+            <h3>16. Are you interested in becoming an Air Taxi Pilot?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q16" component="input" type="radio" validate={[required]} value="yes"/><span>a.) Yes</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q16" component="input" type="radio" validate={[required]} value="no"/><span>b.) No</span></label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label htmlFor="Q17">
+            <h3>17. Would you fly in an autonomous (i.e. no pilot) Air Taxi?</h3>
+          </label>
+          <div>
+            <div className="question-option">
+              <label><Field name="Q17" component="input" type="radio" validate={[required]} value="yes"/><span>a.) Yes</span></label>
+            </div>
+            <div className="question-option">
+              <label><Field name="Q17" component="input" type="radio" validate={[required]} value="no"/><span>b.) No</span></label>
+            </div>
+          </div>
+        </div>
         <div style={{ marginBottom:'60px' }}></div>
         <button type="submit">Submit</button>
       </form>

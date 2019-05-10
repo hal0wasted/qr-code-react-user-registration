@@ -15,7 +15,13 @@ const Actions = {
   Q13_showQ13c: () => ({ type: Types.Q13_SHOW_Q13C, payload: 'visible' }),
   Q13_hideQ13c: () => ({ type: Types.Q13_HIDE_Q13C, payload: 'hidden' }),
   Q13_showQ13d: () => ({ type: Types.Q13_SHOW_Q13D, payload: 'visible' }),
-  Q13_hideQ13d: () => ({ type: Types.Q13_HIDE_Q13D, payload: 'hidden' })
+  Q13_hideQ13d: () => ({ type: Types.Q13_HIDE_Q13D, payload: 'hidden' }),
+  Q14_showQ14a: () => ({ type: Types.Q14_SHOW_Q14A, payload: 'visible' }),
+  Q14_hideQ14a: () => ({ type: Types.Q14_HIDE_Q14A, payload: 'hidden' }),
+  Q14_showQ14b: () => ({ type: Types.Q14_SHOW_Q14B, payload: 'visible' }),
+  Q14_hideQ14b: () => ({ type: Types.Q14_HIDE_Q14B, payload: 'hidden' }),
+  Q14_showQ14c: () => ({ type: Types.Q14_SHOW_Q14C, payload: 'visible' }),
+  Q14_hideQ14c: () => ({ type: Types.Q14_HIDE_Q14C, payload: 'hidden' })
 }
 
 export default Actions
