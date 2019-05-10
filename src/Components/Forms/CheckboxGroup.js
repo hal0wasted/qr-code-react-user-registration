@@ -15,17 +15,22 @@ class CheckboxGroup extends React.Component {
                  onChange={(event) => {
                    const newValue = [...input.value]
                    const letter = option.name.slice(0, 1)
+                   const value = option.name.slice(4, option.name.length).toLowerCase()
                    if (event.target.checked) {
                      if (_.includes(exceptions, letter)) {
                        newValue.splice(0, newValue.length)
-                       newValue.push(option.name.slice(4, option.name.length).toLowerCase())
+                       newValue.push(value)
                        checkException ? checkException() : null
                      } else {
-                       newValue.push(option.name.slice(4, option.name.length).toLowerCase())
-                       check ? check() : null
+                       if (newValue[0] === 'none of the above'
+                          || newValue[0] === 'prefer not to respond'
+                          || newValue[0] === 'i do not have a license'){
+                         newValue.shift()
+                       }
+                       newValue.push(value)
                      }
                    }else{
-                     newValue.splice(newValue.indexOf(option.name.slice(4, option.name.length).toLowerCase()), 1)
+                     newValue.splice(newValue.indexOf(value), 1)
                      uncheck ? uncheck() : null
                    }
                    return input.onChange(newValue)
