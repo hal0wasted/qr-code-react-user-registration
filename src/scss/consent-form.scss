@@ -1,0 +1,27 @@
+h1 {
+  text-align: center;
+}
+
+div {
+  text-align: left;
+  margin: auto;
+  width: 96%;
+  line-height: 1.5em;
+}
+
+input[type="text"]{
+  width: 100%;
+  text-align: left;
+}
+
+.consent-form-top-spacer {
+  margin-top: 100px;
+}
+
+.consent-form-top-spacer:nth-of-type(2) {
+  margin-top: 50px;
+}
+
+.consent-form-bottom-spacer {
+  margin-top: 100px;
+}
