@@ -8,11 +8,11 @@ class UserRegisteredPopUp extends Component {
       <div style={{}}>
         <div style={{}} className='user-registered-pop-up-container'>
           <div style={{
-              width: `50%`,
+              width: `98%`,
               margin: `auto`,
               display: `block`,
               top: `4%`, left: 0, right: 0,
-              height: `${innerHeight * .5}px`,
+              height: `${innerHeight * .65}px`,
               backgroundColor: 'black',
               border: `2px solid white`,
               position: `absolute`

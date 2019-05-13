@@ -10,12 +10,12 @@ class CheckboxGroup extends React.Component {
         <label>
           <input type="checkbox"
                  name={`${input.name}[${index}]`}
-                 value={option.name.slice(4, option.name.length).toLowerCase()}
-                 checked={input.value.indexOf(option.name.slice(4, option.name.length).toLowerCase()) !== -1}
+                 value={option.name.slice(4, option.name.length).toLowerCase().replace(/'/g, '')}
+                 checked={input.value.indexOf(option.name.slice(4, option.name.length).toLowerCase().replace(/'/g, '')) !== -1}
                  onChange={(event) => {
                    const newValue = [...input.value]
                    const letter = option.name.slice(0, 1)
-                   const value = option.name.slice(4, option.name.length).toLowerCase()
+                   let value = option.name.slice(4, option.name.length).toLowerCase().replace(/'/g, '')
                    if (event.target.checked) {
                      if (_.includes(exceptions, letter)) {
                        newValue.splice(0, newValue.length)

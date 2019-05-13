@@ -14,5 +14,7 @@ export const mapDispatch = dispatch => ({
   showCamera: () => { dispatch(Actions.showCamera) },
   hideCamera: () => { dispatch(Actions.hideCamera) },
   showUserRegisteredPopUp: () => { dispatch(Actions.showUserRegisteredPopUp) },
-  hideUserRegisteredPopUp: () => { dispatch(Actions.hideUserRegisteredPopUp) }
+  hideUserRegisteredPopUp: () => { dispatch(Actions.hideUserRegisteredPopUp) },
+  showDemoSurvey: () => { dispatch(Actions.showDemoSurvey) },
+  hideDemoSurvey: () => { dispatch(Actions.hideDemoSurvey) }
 })

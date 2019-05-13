@@ -8,7 +8,9 @@ const Actions = {
   showCamera: { type: Types.SHOW_CAMERA, payload: 'visible' },
   hideCamera: { type: Types.HIDE_CAMERA, payload: 'hidden' },
   showUserRegisteredPopUp: { type: Types.SHOW_USER_REGISTERED_POP_UP, payload: 'visible' },
-  hideUserRegisteredPopUp: { type: Types.HIDE_USER_REGISTERED_POP_UP, payload: 'hidden' }
+  hideUserRegisteredPopUp: { type: Types.HIDE_USER_REGISTERED_POP_UP, payload: 'hidden' },
+  showDemoSurvey: { type: Types.SHOW_DEMO_SURVEY, payload: 'visible' },
+  hideDemoSurvey: { type: Types.HIDE_DEMO_SURVEY, payload: 'hidden' }
 }
 
 export default Actions

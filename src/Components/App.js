@@ -10,15 +10,15 @@ import UserRegisteredPopUp from './Subcomponents/UserRegisteredPopUp'
 
 class App extends Component {
   render(){
-    const { cameraVisibility, userRegisteredPopUpVisibility } = this.props
+    const { cameraVisibility, userRegisteredPopUpVisibility, demoSurveyVisibility } = this.props
     return(
       <Fragment>
         <div className='app-body'>
-          {/*cameraVisibility === 'hidden' ? <BasicUserData/> : null*/}
-          {/*<CameraCapture/>*/}
-          <Demographics/>
+          { cameraVisibility === 'hidden' && demoSurveyVisibility === 'hidden' ? <BasicUserData/> : null }
+          <CameraCapture/>
+          { demoSurveyVisibility === 'hidden' ? null : <Demographics/> }
+          { userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null }
           {/*<ConsentForm/>*/}
-          {/*userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null*/}
         </div>
       </Fragment>
     )

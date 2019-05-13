@@ -27,6 +27,16 @@ app.use(express.static(`${__dirname}/../dist`))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(express.json({ limit: '50mb' }))
 
+app.post(`/demographicSurveySubmit`, (req, res) => {
+  console.log( req.body.data )
+  const data = req.body.data
+  dbConnection.query(`
+    UPDATE DemographicSurvey SET Q1 = '${data.Q1}', Q2 = '${data.Q2}', Q2_SelfResponse = '${data.Q2_SelfResponse}', Q3 = '${data.Q3}', Q3_SelfResponse = '${data.Q3_SelfResponse}', Q4 = '${data.Q4}', Q5 = '${data.Q5}', Q6 = '${data.Q6}', Q7 = '${data.Q7}', Q8 = '${data.Q8}', Q9 = '${data.Q9}', Q10 = '${data.Q10}', Q11 = '${data.Q11}', Q12 = '${data.Q12}', Q12a = '${data.Q12a}', Q13 = '${data.Q13}', Q13a = '${data.Q13a}', Q13b = '${data.Q13b}', Q13c = '${data.Q13c}', Q13d = '${data.Q13d}', Q14 = '${data.Q14}', Q14a = '${data.Q14a}', Q14b = '${data.Q14b}', Q14c = '${data.Q14c}', Q15 = '${data.Q15}', Q16 = '${data.Q16}', Q17 = '${data.Q17}' WHERE PilotID = (SELECT PilotID FROM Pilots WHERE QR = '${data.qr}' LIMIT 0,1)`, (err, result) => {
+    if (!err){ console.log('success'); res.send({ message: 'ok' })
+    }else{ console.log(err) }
+  })
+})
+
 app.post(`/decodeQR`, (req, res) => {
   console.log( req.body.data )
   const fileName = `output.png`
@@ -48,8 +58,21 @@ app.post(`/userDataSubmit`, (req, res) => {
   const userData = req.body.data
   console.log(typeof userData.firstName)
   dbConnection.query(`INSERT INTO Pilots (FirstName, LastName, Email, QR, State) VALUES ('${userData.firstName}', '${userData.lastName}', '${userData.email}', '${userData.qr}', 'REGISTERED')`, (err, result) => {
-    if (!err) res.send({ message: 'ok' })
-    else console.log(err)
+    if (!err) {
+      dbConnection.query(`SELECT PilotID FROM Pilots WHERE QR = '${userData.qr}' LIMIT 0,1`, (err, result) => {
+        console.log(result)
+        if (!err) {
+          dbConnection.query(`INSERT INTO DemographicSurvey (PilotID) VALUES (${result[0].PilotID})`, (err, result) => {
+            if (!err) res.send({ message: 'ok' })
+            else console.log(err)
+          })
+        }else{
+          console.log(err)
+        }
+      })
+    }else{
+      console.log(err)
+    }
   })
 })
 

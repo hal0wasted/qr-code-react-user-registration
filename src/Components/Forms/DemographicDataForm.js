@@ -132,7 +132,7 @@ class DemographicDataForm extends Component {
       {id:3, name:'c.) Commercial driver\'s license'},
       {id:4, name:'d.) Prefer not to respond'}
     ]
-    const Q11_exceptions = [ 'a', 'g' ]
+    const Q11_exceptions = [ 'a', 'd' ]
     const Q12_options = [
       {id:1, name:'a.) No experience'},
       {id:2, actions: { uncheck:this.Q12_uncheck, uncheckUniformly:true }, name:'b.) A taxicab company'},
