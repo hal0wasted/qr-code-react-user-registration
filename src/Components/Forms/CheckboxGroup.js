@@ -21,21 +21,42 @@ class CheckboxGroup extends React.Component {
                        newValue.splice(0, newValue.length)
                        newValue.push(value)
                        checkException ? checkException() : null
-                       options.forEach(op => { if (op.actions) op.actions.uncheck() })
+                       options.forEach(op => {
+                         if (op.actions && op.actions.uncheck) op.actions.uncheck()
+                       })
                      } else {
                        if (newValue[0] === 'none of the above'
+                          || newValue[0] === 'no experience'
                           || newValue[0] === 'prefer not to respond'
                           || newValue[0] === 'i do not have a license'){
                          newValue.shift()
                        }
                        newValue.push(value)
                        check ? check() : null
-                       if (option.actions) option.actions.check()
+                       if (option.actions && option.actions.check) option.actions.check()
                      }
                    }else{
                      newValue.splice(newValue.indexOf(value), 1)
                      uncheck ? uncheck() : null
-                     if (option.actions) option.actions.uncheck()
+                     let checked = []
+                     newValue.forEach(value => {
+                       if (newValue[0] !== 'none of the above'
+                          || newValue[0] === 'no experience'
+                          || newValue[0] !== 'prefer not to respond'
+                          || newValue[0] !== 'i do not have a license'){
+                         checked.push(true)
+                       }
+                     })
+                     console.log(checked, checked.length, checked.length === 0)
+                     if (option.actions && option.actions.uncheck){
+                       if (option.actions.uncheckUniformly === true){
+                         if (checked.length === 0){
+                           option.actions.uncheck()
+                         }
+                       }else{
+                         option.actions.uncheck()
+                       }
+                     }
                    }
                    return input.onChange(newValue)
                   }}/>

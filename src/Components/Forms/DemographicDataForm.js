@@ -9,7 +9,7 @@ import CheckboxGroup from './CheckboxGroup'
 // For multi-checkbox option questions, we'll need to add an additional check upon submission that says,
 // If the array is empty (length of 0) then we submit 'prefer not to respond'
 
-const required = value => value ? undefined : 'Required'
+const required = (value) => value ? undefined : 'Required'
 
 class DemographicDataForm extends Component {
   Q2_showSelfResponse = () => {
@@ -40,7 +40,9 @@ class DemographicDataForm extends Component {
     change('Q12a', null)
   }
   Q12_uncheck = () => {
-    console.log('Q12_uncheck action')
+    const { change, Q12_hideQ12a } = this.props
+    Q12_hideQ12a()
+    change('Q12a', null)
   }
   Q13_checkbox_e = () => {
     const { Q13_showQ13a } = this.props
@@ -130,14 +132,14 @@ class DemographicDataForm extends Component {
       {id:3, name:'c.) Commercial driver\'s license'},
       {id:4, name:'d.) Prefer not to respond'}
     ]
-    const Q11_exceptions = [ 'a', 'd' ]
+    const Q11_exceptions = [ 'a', 'g' ]
     const Q12_options = [
       {id:1, name:'a.) No experience'},
-      {id:2, name:'b.) A taxicab company'},
-      {id:3, name:'c.) Delivery driver'},
-      {id:4, name:'d.) Peer-to-peer ridesharing (e.g. Uber, Lyft, Sidecar, etc)'},
-      {id:5, name:'e.) Package delivery (e.g. FedEx, UPS, USPS, etc)'},
-      {id:6, name:'f.) Over-the-road (OTR)(i.e. long haul trucking)'},
+      {id:2, actions: { uncheck:this.Q12_uncheck, uncheckUniformly:true }, name:'b.) A taxicab company'},
+      {id:3, actions: { uncheck:this.Q12_uncheck, uncheckUniformly:true }, name:'c.) Delivery driver'},
+      {id:4, actions: { uncheck:this.Q12_uncheck, uncheckUniformly:true }, name:'d.) Peer-to-peer ridesharing (e.g. Uber, Lyft, Sidecar, etc)'},
+      {id:5, actions: { uncheck:this.Q12_uncheck, uncheckUniformly:true }, name:'e.) Package delivery (e.g. FedEx, UPS, USPS, etc)'},
+      {id:6, actions: { uncheck:this.Q12_uncheck, uncheckUniformly:true }, name:'f.) Over-the-road (OTR)(i.e. long haul trucking)'},
       {id:7, name:'g.) Prefer not to respond'}
     ]
     const Q12_exceptions = [ 'a', 'g' ]
@@ -459,7 +461,7 @@ class DemographicDataForm extends Component {
           <div>
             <div className="question-option">
               <Field name="Q12" component={CheckboxGroup} options={Q12_options} exceptions={Q12_exceptions}
-                check={this.Q12_check} checkException={this.Q12_checkException} uncheck={this.Q12_uncheck}
+                check={this.Q12_check} checkException={this.Q12_checkException} uncheck={null}
                 validate={[required]}/>
             </div>
           </div>
@@ -736,6 +738,6 @@ class DemographicDataForm extends Component {
 }
 
 export default flow(
-  reduxForm({ form: 'demographicData' }),
-  connect(mapState, mapDispatch)
+  connect(mapState, mapDispatch),
+  reduxForm({ form: 'demographicData' })
 )(DemographicDataForm)
