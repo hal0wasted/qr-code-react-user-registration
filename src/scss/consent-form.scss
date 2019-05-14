@@ -1,15 +1,15 @@
-h1 {
+.consent-form-header {
   text-align: center;
 }
 
-div {
+.consent-form-div {
   text-align: left;
   margin: auto;
   width: 96%;
   line-height: 1.5em;
 }
 
-input[type="text"]{
+input[name="digitalSignature"]{
   width: 100%;
   text-align: left;
 }

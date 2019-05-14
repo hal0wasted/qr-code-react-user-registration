@@ -27,6 +27,14 @@ app.use(express.static(`${__dirname}/../dist`))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(express.json({ limit: '50mb' }))
 
+app.post(`/consentFormSubmit`, (req, res) => {
+  const data = req.body.data
+  dbConnection.query(`UPDATE Pilots SET Consent = '${data}'`, (err, result) => {
+    if (!err) res.send({ message: 'ok' })
+    else console.log(err)
+  })
+})
+
 app.post(`/demographicSurveySubmit`, (req, res) => {
   console.log( req.body.data )
   const data = req.body.data

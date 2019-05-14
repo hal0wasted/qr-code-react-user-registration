@@ -16,5 +16,7 @@ export const mapDispatch = dispatch => ({
   showUserRegisteredPopUp: () => { dispatch(Actions.showUserRegisteredPopUp) },
   hideUserRegisteredPopUp: () => { dispatch(Actions.hideUserRegisteredPopUp) },
   showDemoSurvey: () => { dispatch(Actions.showDemoSurvey) },
-  hideDemoSurvey: () => { dispatch(Actions.hideDemoSurvey) }
+  hideDemoSurvey: () => { dispatch(Actions.hideDemoSurvey) },
+  showConsentForm: () => { dispatch(Actions.showConsentForm) },
+  hideConsentForm: () => { dispatch(Actions.hideConsentForm) }
 })

@@ -10,15 +10,16 @@ import UserRegisteredPopUp from './Subcomponents/UserRegisteredPopUp'
 
 class App extends Component {
   render(){
-    const { /*consentFormVisibility*/, cameraVisibility, userRegisteredPopUpVisibility, demoSurveyVisibility } = this.props
+    const { consentFormVisibility, cameraVisibility, userRegisteredPopUpVisibility, demoSurveyVisibility } = this.props
     return(
       <Fragment>
         <div className='app-body'>
-          { /*cameraVisibility === 'hidden' && demoSurveyVisibility === 'hidden' ? <BasicUserData/> : null*/ }
-          {/*<CameraCapture/>*/}
-          { /*demoSurveyVisibility === 'hidden' ? null : <Demographics/>*/ }
-          { /*userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null*/ }
-          <ConsentForm onSubmit={ /*consent form submit reducer here*/ (values) => { console.log(values) } }/>
+          { cameraVisibility === 'hidden' && demoSurveyVisibility === 'hidden' && consentFormVisibility === 'hidden'
+            ? <BasicUserData/> : null }
+          <CameraCapture/>
+          { consentFormVisibility === 'hidden' ? null : <ConsentForm/> }
+          { demoSurveyVisibility === 'hidden' ? null : <Demographics/> }
+          { userRegisteredPopUpVisibility === 'visible' ? <UserRegisteredPopUp/> : null }
         </div>
       </Fragment>
     )

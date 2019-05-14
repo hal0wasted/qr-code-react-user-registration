@@ -9,6 +9,7 @@ import Q2_selfResponseBoxVisibility from './Q2selfResponseBoxVisibility'
 import Q3_selfResponseBoxVisibility from './Q3selfResponseBoxVisibility'
 import Q12a_visibility from './Q12a_visibility'
 import demoSurveyVisibility from './demoSurveyVisibility'
+import consentFormVisibility from './consentFormVisibility'
 import {
   Q13a_visibility,
   Q13b_visibility,
@@ -35,6 +36,7 @@ export default combineReducers({
   Q14b_visibility: Q14b_visibility,
   Q14c_visibility: Q14c_visibility,
   demoSurveyVisibility: demoSurveyVisibility,
+  consentFormVisibility: consentFormVisibility,
   //
   userRegisteredPopUpVisibility: userRegisteredPopUpVisibility,
   cameraVisibility: cameraVisibility,

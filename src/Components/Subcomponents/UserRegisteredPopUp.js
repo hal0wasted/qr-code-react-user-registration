@@ -12,7 +12,7 @@ class UserRegisteredPopUp extends Component {
               margin: `auto`,
               display: `block`,
               top: `4%`, left: 0, right: 0,
-              height: `${innerHeight * .65}px`,
+              height: `${innerHeight * .7}px`,
               backgroundColor: 'black',
               border: `2px solid white`,
               position: `absolute`

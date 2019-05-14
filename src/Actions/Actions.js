@@ -10,7 +10,9 @@ const Actions = {
   showUserRegisteredPopUp: { type: Types.SHOW_USER_REGISTERED_POP_UP, payload: 'visible' },
   hideUserRegisteredPopUp: { type: Types.HIDE_USER_REGISTERED_POP_UP, payload: 'hidden' },
   showDemoSurvey: { type: Types.SHOW_DEMO_SURVEY, payload: 'visible' },
-  hideDemoSurvey: { type: Types.HIDE_DEMO_SURVEY, payload: 'hidden' }
+  hideDemoSurvey: { type: Types.HIDE_DEMO_SURVEY, payload: 'hidden' },
+  showConsentForm: { type: Types.SHOW_CONSENT_FORM, payload: 'visible' },
+  hideConsentForm: { type: Types.HIDE_CONSENT_FORM, payload: 'hidden' }
 }
 
 export default Actions
