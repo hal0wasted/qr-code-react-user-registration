@@ -14,10 +14,7 @@ const host = process.env.HOST || config.host.getCurrent()
 let server, dbConnection
 
 function sendBootStatus(status){
-  // don't send anything if we're not running in a fork
-  if (!process.send){
-    return
-  }
+  if (!process.send) return
   process.send({ boot: status })
 }
 
@@ -35,14 +32,15 @@ app.post(`/consentFormSubmit`, (req, res) => {
   })
 })
 
-app.post(`/demographicSurveySubmit`, (req, res) => {
+app.post(`/demographicSurveySubmit`, async (req, res) => {
   console.log( req.body.data )
   const data = req.body.data
-  dbConnection.query(`
-    UPDATE DemographicSurvey SET Q1 = '${data.Q1}', Q2 = '${data.Q2}', Q2_SelfResponse = '${data.Q2_SelfResponse}', Q3 = '${data.Q3}', Q3_SelfResponse = '${data.Q3_SelfResponse}', Q4 = '${data.Q4}', Q5 = '${data.Q5}', Q6 = '${data.Q6}', Q7 = '${data.Q7}', Q8 = '${data.Q8}', Q9 = '${data.Q9}', Q10 = '${data.Q10}', Q11 = '${data.Q11}', Q12 = '${data.Q12}', Q12a = '${data.Q12a}', Q13 = '${data.Q13}', Q13a = '${data.Q13a}', Q13b = '${data.Q13b}', Q13c = '${data.Q13c}', Q13d = '${data.Q13d}', Q14 = '${data.Q14}', Q14a = '${data.Q14a}', Q14b = '${data.Q14b}', Q14c = '${data.Q14c}', Q15 = '${data.Q15}', Q16 = '${data.Q16}', Q17 = '${data.Q17}' WHERE PilotID = (SELECT PilotID FROM Pilots WHERE QR = '${data.qr}' LIMIT 0,1)`, (err, result) => {
-    if (!err){ console.log('success'); res.send({ message: 'ok' })
-    }else{ console.log(err) }
-  })
+  try {
+    await insertDemographicData(data)
+    res.send({ message: 'ok' })
+  }catch(err){
+    console.log(err)
+  }
 })
 
 app.post(`/decodeQR`, (req, res) => {
@@ -61,28 +59,19 @@ app.post(`/decodeQR`, (req, res) => {
   })
 })
 
-app.post(`/userDataSubmit`, (req, res) => {
-  console.log(req.body.data)
+app.post(`/userDataSubmit`, async (req, res) => {
   const userData = req.body.data
-  console.log(typeof userData.firstName)
-  dbConnection.query(`INSERT INTO Pilots (FirstName, LastName, Email, QR, State) VALUES ('${userData.firstName}', '${userData.lastName}', '${userData.email}', '${userData.qr}', 'REGISTERED')`, (err, result) => {
-    if (!err) {
-      dbConnection.query(`SELECT PilotID FROM Pilots WHERE QR = '${userData.qr}' LIMIT 0,1`, (err, result) => {
-        console.log(result)
-        if (!err) {
-          dbConnection.query(`INSERT INTO DemographicSurvey (PilotID) VALUES (${result[0].PilotID})`, (err, result) => {
-            if (!err) res.send({ message: 'ok' })
-            else console.log(err)
-          })
-        }else{
-          console.log(err)
-        }
-      })
-    }else{
-      console.log(err)
-    }
-  })
+  try {
+    await insertPilots(userData)
+    const id = await getPilotID(userData.qr)
+    const type = await getDemonstrationType()
+    await insertInitialDemographicData(id, type)
+    res.send({ message: 'ok' })
+  }catch(err){
+    console.log(err)
+  }
 })
+
 
 app.get('/version', (request, response) => {
   response.json({
@@ -90,8 +79,70 @@ app.get('/version', (request, response) => {
   })
 })
 
-console.log(chalk.yellow( '%s booted in %dms - %s://%s:%s' ),
-    pkg.name, Date.now() - start, protocol, host, port)
+console.log(chalk.yellow( '%s booted in %dms - %s://%s:%s' ), pkg.name, Date.now() - start, protocol, host, port)
+
+function insertPilots(userData) {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(`INSERT INTO Pilots (FirstName, LastName, Email, QR, State) VALUES ('${userData.firstName}', '${userData.lastName}', '${userData.email}', '${userData.qr}', 'REGISTERED')`, (err, result) => {
+      if (!err) {
+        resolve()
+      } else {
+        reject(err)
+      }
+    })
+  })
+}
+
+function getPilotID(qr) {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(`SELECT PilotID FROM Pilots WHERE QR = '${qr}' LIMIT 0,1`, (err, result) => {
+      if (!err) {
+        resolve(result[0].PilotID)
+      } else {
+        reject(err)
+      }
+    })
+  })
+}
+
+function insertInitialDemographicData(id, type) {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(`INSERT INTO DemographicSurvey (PilotID, DemoType) VALUES (${id}, '${type}')`, (err, result) => {
+      if (!err) {
+        resolve()
+      } else {
+        reject(err)
+      }
+    })
+  })
+}
+
+function getDemonstrationType() {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(`SELECT DemoType FROM DemonstrationType LIMIT 0,1`, (err, result) => {
+      if (!err) {
+        console.log(result[0].DemoType)
+        resolve(result[0].DemoType)
+      }else{
+        reject(err)
+      }
+    })
+  })
+}
+
+function insertDemographicData(data) {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(`
+      UPDATE DemographicSurvey SET Q1 = '${data.Q1}', Q2 = '${data.Q2}', Q2_SelfResponse = '${data.Q2_SelfResponse}', Q3 = '${data.Q3}', Q3_SelfResponse = '${data.Q3_SelfResponse}', Q4 = '${data.Q4}', Q5 = '${data.Q5}', Q6 = '${data.Q6}', Q7 = '${data.Q7}', Q8 = '${data.Q8}', Q9 = '${data.Q9}', Q10 = '${data.Q10}', Q11 = '${data.Q11}', Q12 = '${data.Q12}', Q12a = '${data.Q12a}', Q13 = '${data.Q13}', Q13a = '${data.Q13a}', Q13b = '${data.Q13b}', Q13c = '${data.Q13c}', Q13d = '${data.Q13d}', Q14 = '${data.Q14}', Q14a = '${data.Q14a}', Q14b = '${data.Q14b}', Q14c = '${data.Q14c}', Q15 = '${data.Q15}', Q16 = '${data.Q16}', Q17 = '${data.Q17}' WHERE PilotID = (SELECT PilotID FROM Pilots WHERE QR = '${data.qr}' LIMIT 0,1)`, (err, result) => {
+      if (!err){
+        resolve()
+      }else{
+        reject(err)
+      }
+    })
+  })
+}
+
 
 // Start a development HTTPS server.
 if (protocol === 'https'){
