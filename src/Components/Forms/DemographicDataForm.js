@@ -6,12 +6,21 @@ import _, { flow } from 'lodash'
 import { mapState, mapDispatch } from '../../Actions/DemographicSurveyActionCreators'
 import CheckboxGroup from './CheckboxGroup'
 
-// For multi-checkbox option questions, we'll need to add an additional check upon submission that says,
-// If the array is empty (length of 0) then we submit 'prefer not to respond'
-
 const required = (value) => value ? undefined : 'Required'
 
 class DemographicDataForm extends Component {
+  componentDidMount() {
+    this.Q2_hideSelfResponse()
+    this.Q3_hideSelfResponse()
+    this.Q12_uncheck()
+    this.Q13_uncheckbox_e()
+    this.Q13_uncheckbox_f()
+    this.Q13_uncheckbox_g()
+    this.Q14_hideQ14a()
+    this.Q14_hideQ14b()
+    this.Q14_hideQ14c()
+    this.Q14_hideAllSuboptions()
+  }
   Q2_showSelfResponse = () => {
     const { Q2_showSelfResponseBox } = this.props
     Q2_showSelfResponseBox()

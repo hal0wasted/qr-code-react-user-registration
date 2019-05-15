@@ -72,7 +72,6 @@ app.post(`/userDataSubmit`, async (req, res) => {
   }
 })
 
-
 app.get('/version', (request, response) => {
   response.json({
     version: pkg.version

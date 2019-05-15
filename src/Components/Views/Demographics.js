@@ -50,7 +50,6 @@ class Demographics extends Component {
     try {
       // now submit demographic survey values to Express route
       const response = await axios.post(`${protocol}://${host.getCurrent()}:${port}/demographicSurveySubmit`, { data:data })
-      // console.log( response )
       if (response.data.message === 'ok'){
         hideDemoSurvey()
       }
