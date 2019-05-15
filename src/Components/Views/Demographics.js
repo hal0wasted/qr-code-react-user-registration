@@ -16,8 +16,9 @@ class Demographics extends Component {
   submit = async (values) => {
     console.log( values )
     // process data
-    const { qr, hideDemoSurvey } = this.props
+    const { qr, hideDemoSurvey, demographicSurveyDemonstrationType } = this.props
     let data = {
+      DemoType: demographicSurveyDemonstrationType,
       Q1: values.Q1,
       Q2: values.Q2,
       Q2_SelfResponse: values["Q2-selfResponseBox"],
@@ -30,8 +31,8 @@ class Demographics extends Component {
       Q8: values.Q8,
       Q9: values.Q9,
       Q10: values.Q10,
-      Q11: values.Q11.join(),
-      Q12: values.Q12.join(),
+      Q11: values.Q11 ? values.Q11.join() : null,
+      Q12: values.Q12 ? values.Q12.join() : null,
       Q12a: values.Q12a ? values.Q12a : null,
       Q13: values.Q13.join(),
       Q13a: values.Q13a ? values.Q13a : null,

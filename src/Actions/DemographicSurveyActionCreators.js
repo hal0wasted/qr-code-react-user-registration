@@ -9,6 +9,7 @@ export const mapState = state => ({
 // ..or you will get a middleware error
 export const mapDispatch = dispatch => ({
   test: () => { dispatch(Actions.test) },
+  setDemographicSurveyDemonstrationType: (data) => { dispatch(Actions.setDemographicSurveyDemonstrationType(data)) },
   Q2_showSelfResponseBox: () => { dispatch(Actions.Q2_showSelfResponseBox()) },
   Q2_hideSelfResponseBox: () => { dispatch(Actions.Q2_hideSelfResponseBox()) },
   Q3_showSelfResponseBox: () => { dispatch(Actions.Q3_showSelfResponseBox()) },

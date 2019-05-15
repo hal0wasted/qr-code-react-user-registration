@@ -10,6 +10,7 @@ import Q3_selfResponseBoxVisibility from './Q3selfResponseBoxVisibility'
 import Q12a_visibility from './Q12a_visibility'
 import demoSurveyVisibility from './demoSurveyVisibility'
 import consentFormVisibility from './consentFormVisibility'
+import demographicSurveyDemonstrationType from './demographicSurveyDemonstrationType'
 import {
   Q13a_visibility,
   Q13b_visibility,
@@ -25,6 +26,7 @@ import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
   // demographicData
+  demographicSurveyDemonstrationType: demographicSurveyDemonstrationType,
   Q2_selfResponseBoxVisibility: Q2_selfResponseBoxVisibility,
   Q3_selfResponseBoxVisibility: Q3_selfResponseBoxVisibility,
   Q12a_visibility: Q12a_visibility,
